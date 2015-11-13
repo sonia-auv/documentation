@@ -3,7 +3,7 @@ pages:
   - User Documentation:
     - Installing: 'installing.md'
     - Style Guide: 'styleguide.md'
-  - Developer Documentation:
+  - Software Documentation:
     - Vision Stack:
       - Design: 'stack_vision/design.md'
       - ROS Interface: 'stack_vision/ros_interface.md'
