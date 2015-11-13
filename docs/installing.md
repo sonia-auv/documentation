@@ -196,7 +196,7 @@ You can now clone the AUV6 script repository and launch the install script:
 	git clone ssh://git@sonia.etsmtl.ca:4223/logiciel/sonia-scripts.git
 	sh sonia-scripts/git_update_repo.sh
 
-You must change your maven [`setttings.xml`](assets/files/setttings.xml) file for adding our repo/mirrors:
+You must change your maven [`settings.xml`](assets/files/settings.xml) file for adding our repo/mirrors:
 
 	mkdir -p ~/.m2
 	wget http://sonia-auv.readthedocs.org/assets/files/settings.xml -O ~/.m2/settings.xml
