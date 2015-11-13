@@ -1,4 +1,5 @@
-# <a name="main"></a>S.O.N.I.A. Installation
+Installing
+==========
 
 This document provides all the steps for configuring your environment.
 
@@ -21,7 +22,8 @@ You will find the details on how to install and configure you environment on all
 - [Configure Development Environment](#S-Development)
 - [Install our softwares](#S-Software)
 
-# <a name="S-Production"></a>Configure Production Environment
+Configure Production Environment
+--------------------------------
 
 
 ### Use `root` as default user
@@ -185,23 +187,67 @@ And then add the file `~/.bash_sonia` with this configuration:
 	
 	## ROS specific configurations
 	source /opt/ros/indigo/setup.bash
+	if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
+	    source 
+	fi
 	
 	## Environment variables
 	export SONIA_WORKSPACE_ROOT=~/Workspace/
 	export ROS_SONIA_WS=$SONIA_WORKSPACE_ROOT/ros_sonia_ws/
 	export AUV6_SONIA_WS=$SONIA_WORKSPACE_ROOT/sonia/
+	export SONIA_SCRIPTS=$AUV6_SONIA_WS/sonia_scripts/
 	export ROS_HOSTNAME=localhost
 	export ROS_MASTER_URI=http://localhost:11311/
+	export LC_ALL="en_US.UTF-8"
+	export EDITOR="vim"
+	
+	## Working with screens
+	alias sa="cd /sonia/auv6; screen -m -d -S auv6 ./auvServer.sh; cd -"
+	alias aa="screen -x auv6"
+	
+	alias sc="cd /sonia/can-server; screen -m -d -S canserver ./cserver; cd -"
+	alias ac="screen -x canserver"
+	
+	alias sv="cd /sonia/sonia-scripts; screen -m -d -S start_ros sh vision-init/start_ros_vision.sh;cd -"
+	alias av="screen -x vision"
+	alias kv="screen -S start_ros -X quit;screen -S vision -X quit;screen -S communicator -X quit;"
+	
+	alias ar="screen -x roscore"
+	alias avc="screen -x communicator"
+	
+	alias smcompress="screen -m -d -S mcompress java -jar \
+	    /sonia/movie-compressor/target/movieCompressor-jar-with-dependencies.jar $1"
+	alias amcompress="screen -x mcompress"
 	
 	## Useful aliases
 	alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
-	alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
+	alias sonia-cd='cd ${ROS_SONIA_WS}'
+	alias sonia-dockbox='ssh root@192.168.0.10'
+	alias poof="killall -s SIGTERM java;killall -s SIGTERM vserver;poweroff"
+	alias repoof="killall -s SIGTERM java;killall -s SIGTERM vserver;reboot"
+	alias wdmesg="watch \"dmesg | tail -n 30\""
 	alias catkin_make='catkin_make -j8 -DCMAKE_BUILD_TYPE=Release'
+	alias rusb="sh $SONIA_SCRIPTS/rebootUSB.sh"
+	alias auvc='cd $SONIA_WORKSPACE_ROOT/auv6; mvn clean install -o;cd -'
+	alias sup="cd $SONIA_SCRIPTS; ./update_auv_dependencies.sh; cd -"
+	alias sbu="cd /$SONIA_SCRIPTS; ./build_auv_dependencies.sh; cd -"
+	
+	alias logpack='mkdir $SONIA_WORKSPACE_ROOT/log/package 2>>/dev/null;find \
+	    . \( \! -iname "*\.raw*" \) -type f|xargs -n1 -i cp -f \
+	    --parents {} $SONIA_WORKSPACE_ROOT/log/package/'
+	
+	$SONIA_SCRIPTS/checkCores.sh
+	$SONIA_SCRIPTS/checkDisks.sh
+	$SONIA_SCRIPTS/checkCamera.sh
+	$SONIA_SCRIPTS/check-svn.sh
 
 
-# <a name="S-Development"></a>Configure Development Environment
+Configure Development Environment
+---------------------------------
 
-# <a name="S-Software"></a>Install S.O.N.I.A. Software
+
+Install S.O.N.I.A. Software
+---------------------------
 
 ### Installing AUV6
 
