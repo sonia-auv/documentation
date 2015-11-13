@@ -72,6 +72,18 @@ Add the recommended modules into your `/etc/modules`.
 
 You can now check the temperature of the CPU by using `sensors` command.
 
+### Configure Log disk
+
+Fist, mount the disk and create a symlink to the mount point:
+
+	mkdir /sonia
+	mkdir -p $SONIA_WORKSPACE_ROOT/log
+	mount /dev/sdb1 $SONIA_WORKSPACE_ROOT/log
+
+In order to configure the log disk, simply add this line at the end of you `/etc/fstab` file:
+
+	echo "/dev/sdb1    /sonia/log    ext4    errors=remount-ro    0    0" >> /etc/fstab
+
 ### Installing the Network
 
 Configure the network interface to use the IP `192.168.0.11/24`
@@ -136,7 +148,23 @@ Create a directory called `Workspace` in your home directory and link `/sonia` t
 
 	cd ~
 	mkdir Workspace
-	ln -sf ~/Workspace /sonia
+	ln -sf ~/Workspace/sonia /sonia
+	
+### Loading scripts
+
+We have several scripts that must launch at startup time, here they are:
+
+	ln -s /sonia/sonia-scripts/canserver.sh /etc/init.d/can-server
+	ln -s /sonia/sonia-scripts/sonia-init.sh /etc/init.d/sonia-init
+	update-rc.d sonia-init defaults 80
+	update-rc.d can-server defaults 81
+	
+### Disable few startup checks
+
+In order to disable the partition checks on startup, type this:
+
+	tune2fs -c 0 /dev/sda1
+	tune2fs -c 0 /dev/sdb1
 
 ### Configure CLI and aliases
 
