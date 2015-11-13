@@ -1,0 +1,17 @@
+# If you add a page, you must add it to the index here
+pages:
+  - Home: 'index.md'
+  - Style Guide: 'styleguide.md'
+
+# Do not edit in PRs below here
+site_name: S.O.N.I.A. Documentation
+
+markdown_extensions:
+  - admonition
+  - smarty
+  - sane_lists
+
+extra_css:
+  - css/code_fixer.css
+
+theme: readthedocs
