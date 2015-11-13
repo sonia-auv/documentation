@@ -30,7 +30,7 @@ Configure Production Environment
 
 Set the password of the `root` user:
 
-    sudo su –
+	sudo su –
 	passwd
 	userdel sonia
 	exit
@@ -60,6 +60,7 @@ You can now install the upgrade and required packages:
 	    xautomation\
 	    tig\
 	    lm-sensors\
+	    coriander\
 	    tree
 
 ### Install Devices Modules
@@ -127,8 +128,9 @@ Now configure the SSH
 	ssh-add ~/.ssh/id_rsa
 	git config --global user.name "S.O.N.I.A. Guest"
 	git config --global user.email sonia@ens.etsmtl.ca
+	git config --global push.default simple
 
-You can now add the content of ~/.ssh/id_rsa.pub to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
+You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
 
 ### Installing the drivers
 
@@ -147,8 +149,8 @@ You can now add the content of ~/.ssh/id_rsa.pub to your Github/Gitlab: `cat ~/.
 Create a directory called `Workspace` in your home directory and link `/sonia` to it:
 
 	cd ~
-	mkdir Workspace
-	ln -sf ~/Workspace/sonia /sonia
+	mkdir sonia
+	ln -sf ~/sonia /sonia
 	
 ### Disable few startup checks
 
@@ -210,14 +212,73 @@ Then resource your `.bashrc`:
 
 We have several scripts that must launch at startup time, here they are:
 
-	ln -s $SONIA_SCRIPTS/canserver.sh /etc/init.d/can-server
-	ln -s $SONIA_SCRIPTS/sonia-init.sh /etc/init.d/sonia-init
+	ln -sf $SONIA_SCRIPTS/canserver.sh /etc/init.d/can-server
+	ln -sf $SONIA_SCRIPTS/sonia-init.sh /etc/init.d/sonia-init
 	update-rc.d sonia-init defaults 80
 	update-rc.d can-server defaults 81
 
-
 Configure Development Environment
 ---------------------------------
+
+### Installing the dependencies
+
+Add the partner repositories in the source list:
+
+	sed -i '/http:\/\/archive.canonical.com\/ubuntu trusty partner/s/^# //g' /etc/apt/sources.list
+
+You can now install the upgrade and required packages:
+
+	aptitude update
+	aptitude upgrade -y
+	aptitude dist-upgrade -y
+	aptitude install -y \
+	    make\
+	    cmake\
+	    git\
+	    tig\
+	    tree
+
+### Installing Git
+
+	ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
+	git config --global user.name "Your Name"
+	git config --global user.email you@email.ext
+	git config --global push.default simple
+
+You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
+
+### Working with Eclipse
+
+We use Eclipse for our Java development and we also need the C++ plugin that allows us to run and debug C++ code.
+
+First, you need to download the last version on [eclipse website](https://www.eclipse.org/downloads/):
+
+	cd
+	wget http://eclipse.mirror.rafal.ca/technology/epp/downloads/release/mars/1/eclipse-java-mars-1-linux-gtk-x86_64.tar.gz
+	tar zxvf eclipse-java-mars-1-linux-gtk-x86_64.tar.gz
+	sudo mv eclipse /opt/eclipse
+
+!!! note
+
+	You will need these plugin to work with our AUV6/AUV7 software:
+	
+	- maven - http://download.eclipse.org/technology/m2e/releases
+		- m2e - Maven Integration for Eclipse
+		- m2e connector for xmlbeans
+	- pydev - http://pydev.org/updates
+		- pydev for eclipse
+	- egit - http://download.eclipse.org/egit/updates
+		- Eclipse Git Team provider
+	- cdt - http://download.eclipse.org/tools/cdt/releases/8.5
+		- C/C++ development tools
+	- windows build - outil pour interface swing - http://dl.google.com/eclipse/inst/d2wbpro/latest/3.7
+		- Swing Designer
+		- WindowsBuild Engine (Required)
+
+### Working with CLion
+
 
 
 Install S.O.N.I.A. Software
