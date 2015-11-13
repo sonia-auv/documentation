@@ -1,4 +1,5 @@
 pages:
+  - Home: 'index.md'
   - User Documentation:
     - Installing: 'installing.md'
     - Style Guide: 'styleguide.md'
