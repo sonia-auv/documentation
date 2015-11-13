@@ -12,7 +12,4 @@ markdown_extensions:
   - smarty
   - sane_lists
 
-extra_css:
-  - css/code_fixer.css
-
 theme: readthedocs
