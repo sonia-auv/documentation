@@ -1,8 +1,9 @@
 # SONIA Configuration
 
 ## Environment variables
-export SONIA_WORKSPACE_ROOT=~/Workspace/sonia
+export SONIA_WORKSPACE_ROOT=~/Workspace/
 export ROS_SONIA_WS=$SONIA_WORKSPACE_ROOT/ros_sonia_ws/
+export AUV6_SONIA_WS=$SONIA_WORKSPACE_ROOT/sonia/
 export SONIA_SCRIPTS=$AUV6_SONIA_WS/sonia_scripts/
 export ROS_HOSTNAME=localhost
 export ROS_MASTER_URI=http://localhost:11311/
