@@ -1,6 +1,7 @@
 # If you add a page, you must add it to the index here
 pages:
   - Home: 'index.md'
+  - Installation: 'installing.md'
   - Style Guide: 'styleguide.md'
 
 # Do not edit in PRs below here
