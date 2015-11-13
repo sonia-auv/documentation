@@ -277,9 +277,9 @@ First, you need to download the last version on [eclipse website](https://www.ec
 		- Swing Designer
 		- WindowsBuild Engine (Required)
 
-### Working with CLion
+You can also configure Eclipse to use our formatting file. You can find it here:
 
-
+	wget http://sonia-auv.readthedocs.org/assets/files/sonia-formatter.epf
 
 Install S.O.N.I.A. Software
 ---------------------------
