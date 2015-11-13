@@ -1,8 +1,11 @@
 pages:
   - Home: 'index.md'
-  - User Documentation:
+  - USER DOCUMENTATION:
     - Installing: 'installing.md'
     - Style Guide: 'styleguide.md'
+  - DEVELOPER DOCUMENTATION:
+    - VISION STACK:
+      - Design: 'stack_vision/design.md'
 
 site_name: S.O.N.I.A. Documentation
 repo_url: https://github.com/sonia-auv/documentation
