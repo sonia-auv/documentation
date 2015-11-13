@@ -3,7 +3,7 @@
 ## Environment variables
 export SONIA_WORKSPACE_ROOT=~/Workspace/sonia
 export ROS_SONIA_WS=$SONIA_WORKSPACE_ROOT/ros_sonia_ws/
-export SONIA_SCRIPTS=$AUV6_SONIA_WS/sonia_scripts/
+export SONIA_SCRIPTS=$AUV6_SONIA_WS/sonia-scripts/
 export ROS_HOSTNAME=localhost
 export ROS_MASTER_URI=http://localhost:11311/
 export LC_ALL="en_US.UTF-8"
