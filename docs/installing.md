@@ -150,21 +150,19 @@ Create a directory called `Workspace` in your home directory and link `/sonia` t
 	mkdir Workspace
 	ln -sf ~/Workspace/sonia /sonia
 	
-### Loading scripts
-
-We have several scripts that must launch at startup time, here they are:
-
-	ln -s /sonia/sonia-scripts/canserver.sh /etc/init.d/can-server
-	ln -s /sonia/sonia-scripts/sonia-init.sh /etc/init.d/sonia-init
-	update-rc.d sonia-init defaults 80
-	update-rc.d can-server defaults 81
-	
 ### Disable few startup checks
 
 In order to disable the partition checks on startup, type this:
 
 	tune2fs -c 0 /dev/sda1
 	tune2fs -c 0 /dev/sdb1
+
+### Configure kernel core dumps
+
+For configuring the kernel core dumps, simply use these commands:
+
+	mkdir -p /sonia/cores
+	echo "kernel.core_pattern = /sonia/cores" >> /etc/sysctl.conf
 
 ### Configure CLI and aliases
 
@@ -197,11 +195,25 @@ Now edit your `~/.bashrc` and add the following configuration:
 
 You can now add the file [`~/.bash_aliases`](assets/files/bash_aliases) with the following configuration:
 
-	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_aliases
+	wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
 
 And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this configuration:
 
 	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
+
+
+Then resource your `.bashrc`:
+
+	source ~/.bashrc
+
+### Loading scripts
+
+We have several scripts that must launch at startup time, here they are:
+
+	ln -s $SONIA_SCRIPTS/canserver.sh /etc/init.d/can-server
+	ln -s $SONIA_SCRIPTS/sonia-init.sh /etc/init.d/sonia-init
+	update-rc.d sonia-init defaults 80
+	update-rc.d can-server defaults 81
 
 
 Configure Development Environment
