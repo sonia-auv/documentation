@@ -1,11 +1,10 @@
-# If you add a page, you must add it to the index here
 pages:
-  - Home: 'index.md'
-  - Installation: 'installation.md'
-  - Style Guide: 'styleguide.md'
+  - User Documentation:
+    - Installing: 'installing.md'
+    - Style Guide: 'styleguide.md'
 
-# Do not edit in PRs below here
 site_name: S.O.N.I.A. Documentation
+repo_url: https://github.com/sonia-auv/documentation
 
 markdown_extensions:
   - admonition
