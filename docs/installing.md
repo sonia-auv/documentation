@@ -167,12 +167,13 @@ Now edit your `~/.bashrc` and add the following configuration:
 	    . ~/.bash_sonia
 	fi
 
-You can now add the file [`~/. bash_aliases`](assets/files/.bash_aliases) with the following configuration:
+You can now add the file [`~/.bash_aliases`](assets/files/bash_aliases) with the following configuration:
 
+	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_aliases
 
-And then add the file [`~/.bash_sonia`](assets/files/.bash_sonia) with this configuration:
+And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this configuration:
 
-
+	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
 
 
 Configure Development Environment
@@ -195,11 +196,11 @@ You can now clone the AUV6 script repository and launch the install script:
 	git clone ssh://git@sonia.etsmtl.ca:4223/logiciel/sonia-scripts.git
 	sh sonia-scripts/git_update_repo.sh
 
-You must change your maven `setttings.xml` file for adding our repo/mirrors:
+You must change your maven [`setttings.xml`](assets/files/setttings.xml) file for adding our repo/mirrors:
 
 	mkdir -p ~/.m2
-	wget http://sonia.etsmtl.ca:120/soniapedia/images/5/51/Settings.xml \
-	    -O ~/.m2/settings.xml
+	wget http://sonia-auv.readthedocs.org/assets/files/settings.xml -O ~/.m2/settings.xml
+	    
 	
 You can now build the CAN server:
 
