@@ -61,6 +61,7 @@ You can now install the upgrade and required packages:
 	    tig\
 	    lm-sensors\
 	    coriander\
+	    xserver-xorg-lts-utopic
 	    tree
 
 ### Install Devices Modules
