@@ -11,6 +11,9 @@ pages:
     - Provider Sonar: 'software/provider_sonar.md'
     - Provider Media: 'software/provider_media.md'
     - Provider CAN: 'software/provider_can.md'
+  - Electrical Documentation:
+    - Overview: 'electrical/overview.md'
+    - Hydrophones: 'electrical/hydrophones.md'
 
 site_name: S.O.N.I.A. Documentation
 repo_url: https://github.com/sonia-auv/documentation
