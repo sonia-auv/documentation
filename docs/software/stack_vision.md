@@ -1,5 +1,5 @@
-ROS Interface
-=============
+Vision API
+==========
 
 This file describe how the provider vision software is interfacing with ROS.
 You will find here every information you need about the services and messages.

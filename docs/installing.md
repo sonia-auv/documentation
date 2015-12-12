@@ -139,11 +139,20 @@ You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~
 	wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
 	tar zxvf linuxcan.tar.gz
 	sudo mv linuxcan/ /opt/
-	cd linuxcan
+	rm linuxcan.tar.gz
+	cd /opt/linuxcan
 	make
 	sudo make install
-	cd ~
-	rm -r linuxcan.tar.gz linuxcan
+	
+During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
+
+	sed -i -e '2293d' ./leaf/leafHWIf.c
+	sed -i -e '2293d' ./leaf/leafHWIf.c
+	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
+	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
+	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
+	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
+	sed -i -e '900d' ./pciefd/pciefd_hwif.c
 
 ### Setup directories
 
