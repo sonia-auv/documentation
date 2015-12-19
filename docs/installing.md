@@ -30,9 +30,8 @@ Configure Production Environment
 
 Set the password of the `root` user:
 
-	sudo su –
+	sudo su
 	passwd
-	userdel sonia
 	exit
 	exit
 
@@ -61,7 +60,7 @@ You can now install the upgrade and required packages:
 	    tig\
 	    lm-sensors\
 	    coriander\
-	    xserver-xorg-lts-utopic
+	    xserver-xorg-lts-utopic\
 	    tree
 
 ### Install Devices Modules
@@ -78,9 +77,9 @@ You can now check the temperature of the CPU by using `sensors` command.
 
 Fist, mount the disk and create a symlink to the mount point:
 
-	mkdir /sonia
-	mkdir -p $SONIA_WORKSPACE_ROOT/log
-	mount /dev/sdb1 $SONIA_WORKSPACE_ROOT/log
+	ln -s $HOME /sonia
+	mkdir -p /sonia/log
+	mount /dev/sdb1 /sonia/log
 
 In order to configure the log disk, simply add this line at the end of you `/etc/fstab` file:
 
@@ -135,14 +134,14 @@ You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~
 
 ### Installing the drivers
 
-	cd ~
-	wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
-	tar zxvf linuxcan.tar.gz
-	sudo mv linuxcan/ /opt/
-	rm linuxcan.tar.gz
-	cd /opt/linuxcan
-	make
-	sudo make install
+	cd /tmp/
+    wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
+    tar zxvf linuxcan.tar.gz
+	cd ./linuxcan
+	make -j8
+	make install
+    cd ../
+    rm -r linuxcan linuxcan.tar.gz
 	
 During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
 
@@ -159,8 +158,8 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 Create a directory called `Workspace` in your home directory and link `/sonia` to it:
 
 	cd ~
-	mkdir sonia
-	ln -sf ~/sonia /sonia
+	mkdir sonia_ws
+    mkdir ros_sonia_ws
 	
 ### Disable few startup checks
 
@@ -302,8 +301,8 @@ First of all, install all AUV6 dependencies:
 
 You can now clone the AUV6 script repository and launch the install script:
 
-	mkdir -p $AUV6_SONIA_WS
-	cd $AUV6_SONIA_WS
+	mkdir -p $SONIA_WORKSPACE_ROOT
+	cd $SONIA_WORKSPACE_ROOT
 	git clone ssh://git@sonia.etsmtl.ca:4223/logiciel/sonia-scripts.git
 	sh sonia-scripts/git_update_repo.sh
 
@@ -315,18 +314,18 @@ You must change your maven [`settings.xml`](assets/files/settings.xml) file for 
 	
 You can now build the CAN server:
 
-	cd $AUV6_SONIA_WS/can-server
+	cd $SONIA_WORKSPACE_ROOT/can-server
 	scons
 
 And now build the whole AUV6 system:
 
-	cd $AUV6_SONIA_WS/sonia-jaus-library
+	cd $SONIA_WORKSPACE_ROOT/sonia-jaus-library
     mvn clean install
-    cd $AUV6_SONIA_WS/octets-common
+    cd $SONIA_WORKSPACE_ROOT/octets-common
     mvn clean install
-    cd $AUV6_SONIA_WS/auv-mission-library
+    cd $SONIA_WORKSPACE_ROOT/auv-mission-library
     mvn clean install
-    cd $AUV6_SONIA_WS/auv6
+    cd $SONIA_WORKSPACE_ROOT/auv6
 	mvn clean install
 
 That's it ! You can now work with AUV6
@@ -373,7 +372,7 @@ You will have to install few packages that allows us to build rosjava packages a
 
 We provide a git repository with our messages and scripts that configure `rosjava` without complication. You can perform these tasks in order to install the system with our solution:
 
-	cd $SONIA_WORKSPACE_ROOT
+	cd /sonia
 	git clone https://github.com/sonia-auv/rosjava_ws.git
 	cd rosjava_ws
 	./install.sh
