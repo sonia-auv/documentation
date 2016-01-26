@@ -1,19 +1,27 @@
 pages:
   - Home: 'index.md'
   - User Documentation:
-    - Installing: 'installing.md'
-    - Style Guide: 'styleguide.md'
+    - Getting Started: 'user/getting_started.md'
+    - Installation: 'user/installation.md'
+    - C++ Style Guide: 'user/c++_style_guide.md'
   - Software Documentation:
     - Overview: 'software/overview.md'
-    - Stack Vision: 'software/stack_vision.md'
     - Provider DVL: 'software/provider_dvl.md'
     - Provider IMU: 'software/provider_imu.md'
     - Provider Sonar: 'software/provider_sonar.md'
     - Provider Media: 'software/provider_media.md'
     - Provider CAN: 'software/provider_can.md'
+    - Proc Vision: 'software/proc_vision.md'
+    - Proc Navigation: 'software/proc_navigation.md'
   - Electrical Documentation:
     - Overview: 'electrical/overview.md'
     - Hydrophones: 'electrical/hydrophones.md'
+  - Mechanical Documentation:
+    - Overview: 'mechanical/overview.md'
+  - About S.O.N.I.A.:
+    - The Project: 'about/project.md'
+    - Open Source Philosophy: 'about/open_source.md'
+    - Sponsors of S.O.N.I.A.: 'about/sponsors.md'
 
 site_name: S.O.N.I.A. Documentation
 repo_url: https://github.com/sonia-auv/documentation
