@@ -1,0 +1,22 @@
+# SONIA Configuration
+
+## Environment variables
+export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia/
+export ROS_SONIA_WS=~/Workspaces/ros_sonia_ws/
+# export ROS_MASTER_URI=http://localhost:11311/
+export ROS_MASTER_URI=http://192.168.0.11:11311/
+export LC_ALL="en_US.UTF-8"
+export EDITOR="vim"
+
+## ROS specific configurations
+source /opt/ros/indigo/setup.bash
+if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
+    source $ROS_SONIA_WS/devel/setup.bash
+fi
+
+## Useful aliases
+alias sonia-ssh='ssh -X root@192.168.0.11'
+alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
+alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
+alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
+
