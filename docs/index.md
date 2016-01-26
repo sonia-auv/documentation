@@ -41,6 +41,7 @@ This documentation is organized into a couple section:
 
 - [Overview](electrical/overview.md)
 - [Hydrophones](electrical/hydrophones.md)
+- [DVL](electrical/dvl.md)
 
 ## Mechanical Documentation <a name="mechanical"></a>
 

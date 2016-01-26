@@ -16,6 +16,7 @@ pages:
   - Electrical Documentation:
     - Overview: 'electrical/overview.md'
     - Hydrophones: 'electrical/hydrophones.md'
+    - DVL: 'electrical/dvl.md'
   - Mechanical Documentation:
     - Overview: 'mechanical/overview.md'
   - About S.O.N.I.A.:
