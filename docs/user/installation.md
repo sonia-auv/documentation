@@ -1,5 +1,4 @@
-Installing
-==========
+# <a name="title"></a> Installation
 
 This document provides all the steps for configuring your environment.
 
@@ -18,15 +17,31 @@ This repository is composed of several branches:
 
 You will find the details on how to install and configure you environment on all the specific sections:
 
-- [Configure Production Environment](#S-Production)
-- [Configure Development Environment](#S-Development)
-- [Install our softwares](#S-Software)
+- [Configure Production Environment](#production)
+	- [Use `root` as default user](#prod_user)
+	- [Installing the dependencies](#prod_deps)
+	- [Install Devices Modules](#prod_modules)
+	- [Configure Log disk](#prod_disk)
+	- [Installing the Network](#prod_network)
+	- [Installing Git](#prod_git)
+	- [Installing the Drivers](#prod_drivers)
+	- [Setup directories](#prod_dirs)
+	- [Disable few startup checks](#prod_checks)
+	- [Configure kernel core dumps](#prod_cores)
+	- [Configure CLI and aliases](#prod_cli)
+	- [Loading scripts](#prod_scripts)
+- [Configure Development Environment](#development)
+    - [Installing the dependencies](#dev_deps)
+    - [Installing the drivers](#dev_drivers)
+    - [Installing Git](#dev_git)
+    - [Working with Eclipse](#dev_eclipse)
+- [Install our softwares](#software)
+    - [Installing AUV6](#soft_auv6)
+    - [Installing AUV7](#soft_auv7)
 
-Configure Production Environment
---------------------------------
+## Configure Production Environment <a name="production"></a>
 
-
-### Use `root` as default user
+### <a name="prod_user"></a> Use `root` as default user
 
 Set the password of the `root` user:
 
@@ -40,7 +55,7 @@ Then login with `root` and delete the user `sonia`:
 	userdel sonia
 	rm -rf /home/sonia
 
-### Installing the dependencies
+### <a name="prod_deps"></a> Installing the dependencies
 
 Add the partner repositories in the source list:
 
@@ -61,9 +76,10 @@ You can now install the upgrade and required packages:
 	    lm-sensors\
 	    coriander\
 	    xserver-xorg-lts-utopic\
+	    vim\
 	    tree
 
-### Install Devices Modules
+### <a name="prod_modules"></a> Install Devices Modules
 
 Type this command in order to list the modules needed by your system:
 
@@ -73,7 +89,7 @@ Add the recommended modules into your `/etc/modules`.
 
 You can now check the temperature of the CPU by using `sensors` command.
 
-### Configure Log disk
+### <a name="prod_disk"></a> Configure Log disk
 
 Fist, mount the disk and create a symlink to the mount point:
 
@@ -85,7 +101,7 @@ In order to configure the log disk, simply add this line at the end of you `/etc
 
 	echo "/dev/sdb1    /sonia/log    ext4    errors=remount-ro    0    0" >> /etc/fstab
 
-### Installing the Network
+### <a name="prod_network"></a> Installing the Network
 
 Configure the network interface to use the IP `192.168.0.11/24`
 Open the file `/etc/network/interfaces`, it should look like this:
@@ -121,7 +137,7 @@ Now configure the SSH
 	    /etc/ssh/sshd_config
 	service ssh restart
 
-### Installing Git
+### <a name="prod_git"></a> Installing Git
 
 	ssh-keygen -t rsa -b 4096 -C "sonia@ens.etsmtl.ca"
 	eval "$(ssh-agent -s)"
@@ -132,7 +148,7 @@ Now configure the SSH
 
 You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
 
-### Installing the drivers
+### <a name="prod_drivers"></a> Installing the drivers
 
 	cd /tmp/
     wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
@@ -153,7 +169,7 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
 	sed -i -e '900d' ./pciefd/pciefd_hwif.c
 
-### Setup directories
+### <a name="prod_dirs"></a> Setup directories
 
 Create a directory called `Workspace` in your home directory and link `/sonia` to it:
 
@@ -161,21 +177,21 @@ Create a directory called `Workspace` in your home directory and link `/sonia` t
 	mkdir sonia_ws
     mkdir ros_sonia_ws
 	
-### Disable few startup checks
+### <a name="prod_checks"></a> Disable few startup checks
 
 In order to disable the partition checks on startup, type this:
 
 	tune2fs -c 0 /dev/sda1
 	tune2fs -c 0 /dev/sdb1
 
-### Configure kernel core dumps
+### <a name="prod_cores"></a> Configure kernel core dumps
 
 For configuring the kernel core dumps, simply use these commands:
 
 	mkdir -p /sonia/cores
 	echo "kernel.core_pattern = /sonia/cores" >> /etc/sysctl.conf
 
-### Configure CLI and aliases
+### <a name="prod_cli"></a> Configure CLI and aliases
 
 Now install bash_it in order to have a better command line interface:
 
@@ -184,7 +200,13 @@ Now install bash_it in order to have a better command line interface:
 	rm ~/.bashrc.bak
 	sed -i -e 's/bobby/nwinkler/g' ~/.bashrc
 
-Now edit your `~/.bashrc` and add the following configuration:
+Now edit your `~/.bashrc` and add the following configuration at the beginning of the file:
+
+	# If not running interactively, con't do anything
+	case $- in
+	    *i*) ;;
+	      *) return;;
+	esac
 
 	if ! shopt -oq posix; then
 	  if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -193,7 +215,9 @@ Now edit your `~/.bashrc` and add the following configuration:
 	    . /etc/bash_completion
 	  fi
 	fi
-	
+
+And source the other bash files at the end of your file:
+
 	# Load common aliases
 	if [ -f ~/.bash_aliases ]; then
 	    . ~/.bash_aliases
@@ -204,6 +228,10 @@ Now edit your `~/.bashrc` and add the following configuration:
 	    . ~/.bash_sonia
 	fi
 
+You can download the sample bashrc file here:
+
+	wget http://sonia-auv.readthedocs.org/assets/files/bashrc -O ~/.bashrc
+
 You can now add the file [`~/.bash_aliases`](assets/files/bash_aliases) with the following configuration:
 
 	wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
@@ -212,12 +240,16 @@ And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this confi
 
 	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
 
+!!!Note
+	If you are running a development environment, prefere adding the following configuration:
+
+		wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
 
 Then resource your `.bashrc`:
 
 	source ~/.bashrc
 
-### Loading scripts
+### <a name="prod_scripts"></a> Loading scripts
 
 We have several scripts that must launch at startup time, here they are:
 
@@ -226,10 +258,9 @@ We have several scripts that must launch at startup time, here they are:
 	update-rc.d sonia-init defaults 80
 	update-rc.d can-server defaults 81
 
-Configure Development Environment
----------------------------------
+## Configure Development Environment <a name="development"></a>
 
-### Installing the dependencies
+### <a name=""></a> Installing the dependencies
 
 Add the partner repositories in the source list:
 
@@ -247,7 +278,28 @@ You can now install the upgrade and required packages:
 	    tig\
 	    tree
 
-### Installing Git
+### <a name=""></a> Installing the drivers
+
+	cd /tmp/
+    wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
+    tar zxvf linuxcan.tar.gz
+	cd ./linuxcan
+	make -j8
+	make install
+    cd ../
+    rm -r linuxcan linuxcan.tar.gz
+	
+During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
+
+	sed -i -e '2293d' ./leaf/leafHWIf.c
+	sed -i -e '2293d' ./leaf/leafHWIf.c
+	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
+	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
+	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
+	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
+	sed -i -e '900d' ./pciefd/pciefd_hwif.c
+
+### <a name=""></a> Installing Git
 
 	ssh-keygen -t rsa -b 4096 -C "you@email.ext"
 	eval "$(ssh-agent -s)"
@@ -258,7 +310,7 @@ You can now install the upgrade and required packages:
 
 You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
 
-### Working with Eclipse
+### <a name=""></a> Working with Eclipse
 
 We use Eclipse for our Java development and we also need the C++ plugin that allows us to run and debug C++ code.
 
@@ -290,10 +342,9 @@ You can also configure Eclipse to use our formatting file. You can find it here:
 
 	wget http://sonia-auv.readthedocs.org/assets/files/sonia-formatter.epf
 
-Install S.O.N.I.A. Software
----------------------------
+## Install S.O.N.I.A. Software <a name="software"></a>
 
-### Installing AUV6
+### <a name=""></a> Installing AUV6
 
 First of all, install all AUV6 dependencies:
 
@@ -330,7 +381,7 @@ And now build the whole AUV6 system:
 
 That's it ! You can now work with AUV6
 
-### Installing AUV7
+### <a name=""></a> Installing AUV7
 
 First of all, you must install ROS and its dependencies:
 
@@ -344,7 +395,8 @@ We recommend that you install the desktop-full ditribution of ROS even if you do
 
 	sudo apt-get install -y \
 	    ros-indigo-desktop-full\
-	    python-rosinstall
+	    python-rosinstall\
+	    ros-indigo-rosjava
 	sudo rosdep init
 	rosdep update
 	source /opt/ros/indigo/setup.bash
@@ -353,27 +405,9 @@ You can now clone the AUV7 workspace repository and build it:
 
 	mkdir -p $ROS_SONIA_WS
 	git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
-	cd $ROS_SONIA_WS
-	git submodule init
-	git submodule update --remote --rebase
-	catkin_make
+    cd $ROS_SONIA_WS
+    ./git_update.sh -d
+	catkin_make -j8
 	source devel/setup.bash
 
 That's it ! You can now work with AUV7
-
-### Install ROS Java
-
-When you have installed AUV6 and AUV7, you may want to use AUV6 with AUV7. We are using `rosjava` in order to have an interface between the two software suite.
-
-You will have to install few packages that allows us to build rosjava packages as java `.jar`:
-
-	aptitude install -y ros-indigo-rosjava
-	source /opt/ros/indigo/setup.bash
-
-We provide a git repository with our messages and scripts that configure `rosjava` without complication. You can perform these tasks in order to install the system with our solution:
-
-	cd /sonia
-	git clone https://github.com/sonia-auv/rosjava_ws.git
-	cd rosjava_ws
-	./install.sh
-

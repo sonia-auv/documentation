@@ -5,7 +5,8 @@ export SONIA_WORKSPACE_ROOT=~/sonia_ws
 export ROS_SONIA_WS=~/ros_sonia_ws/
 export SONIA_SCRIPTS=$SONIA_WORKSPACE_ROOT/sonia-scripts/
 export ROS_HOSTNAME=localhost
-export ROS_MASTER_URI=http://localhost:11311/
+export ROS_MASTER_URI=http://192.168.0.11:11311
+export ROS_IP=192.168.0.11
 export LC_ALL="en_US.UTF-8"
 export EDITOR="vim"
 
@@ -51,6 +52,6 @@ alias logpack='mkdir $SONIA_WORKSPACE_ROOT/log/package 2>>/dev/null;find \
     --parents {} $SONIA_WORKSPACE_ROOT/log/package/'
 
 $SONIA_SCRIPTS/checkCores.sh
-$SONIA_SCRIPTS/checkDisks.sh
-$SONIA_SCRIPTS/checkCamera.sh
-$SONIA_SCRIPTS/check-svn.sh
+# $SONIA_SCRIPTS/checkDisks.sh
+# $SONIA_SCRIPTS/checkCamera.sh
+# $SONIA_SCRIPTS/check-svn.sh
