@@ -1,5 +1,4 @@
-Vision API
-==========
+# Proc Vision
 
 This file describe how the provider vision software is interfacing with ROS.
 You will find here every information you need about the services and messages.
@@ -8,8 +7,7 @@ The vision stacks works just like a server, that is to say, we can send queries 
 The following diagram illustrates the general operation:
 
 
-Collecting and processing data
-------------------------------
+## Collecting and processing data
 
 ### Data recovery
 
@@ -33,13 +31,11 @@ The filter chains as such are stored in XML files, so you have to ask the vision
 
 Note: This feature is being implemented, currently the vision server applies no filter on the data stream (but the mechanism is implemented).
 
-Global Architecture
--------------------
+## Global Architecture
 
 ![AUV7 Design](../assets/img/software_vision_stack_design.jpeg)
 
 Services ROS
-------------
 
 Here is the full list of available services in this ROS packages:
 

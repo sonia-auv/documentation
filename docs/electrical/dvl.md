@@ -14,6 +14,7 @@ The DVL sends an accoustic wave at a specific frequency. This wave is going to b
 The DVL will then receive the reflected wave and it will be able to observe a delta between the sent wave and the received one.
 
 From this observation, we can have sort out the following statements:
+
 - If F_r < f_o, the submarine is moving away from the body that reflected the wave.
 - If F_r > F_o, the submarine is moving toward the body that reflected the wave.
 
