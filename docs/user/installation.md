@@ -147,6 +147,18 @@ Now configure the SSH
 
 You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
 
+We also need to setup a git server in order to be able to push changes on the submarine when there is no internet access. To do so, create a git user and setup the `.ssh` directory:
+
+	touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
+	
+When this has been done, you can add your ssh key to the server. If your public key is located in `~/.ssh/id_rsa.pub`, the following command will add your key on the submarine:
+
+	cat ~/.ssh/id_rsa.pub | ssh root@192.168.0.11 'dd of=.ssh/authorized_keys oflag=append conv=notrunc'
+	
+Finally, on the production environment, you will have to enable pushing on non-bar repository, do to so, type:
+
+	git config --global receive.denyCurrentBranch warn
+
 ### <a name="prod_drivers"></a> Installing the drivers
 
 	cd /tmp/
