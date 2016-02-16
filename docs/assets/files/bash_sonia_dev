@@ -5,6 +5,7 @@ export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia/
 export ROS_SONIA_WS=~/Workspaces/ros_sonia_ws/
 # export ROS_MASTER_URI=http://localhost:11311/
 export ROS_MASTER_URI=http://192.168.0.11:11311/
+export ROS_HOME=$ROS_SONIA_WS
 export LC_ALL="en_US.UTF-8"
 export EDITOR="vim"
 
