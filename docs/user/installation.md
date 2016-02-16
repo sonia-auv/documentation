@@ -45,10 +45,9 @@ You will find the details on how to install and configure you environment on all
 
 Set the password of the `root` user:
 
-	sudo su
-	passwd
-	exit
-	exit
+	sudo passwd root
+	sudo usermod -U root
+	sudo bash -c "echo -e \"[SeatDefaults]\ngreeter-show-manual-login=true\" >> /etc/lightdm/lightdm.conf"cd
 
 Then login with `root` and delete the user `sonia`:
 
