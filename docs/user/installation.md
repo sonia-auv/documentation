@@ -158,6 +158,10 @@ When this has been done, you can add your ssh key to the server. If your public 
 Finally, on the production environment, you will have to enable pushing on non-bar repository, do to so, type:
 
 	git config --global receive.denyCurrentBranch warn
+	
+This is it ! You are now able to add remotes to the submarine on your development environment. The command for adding the ros_sonia_ws repository is the following:
+
+	git remote add auv root@192.168.0.11:/root/ros_sonia_ws/
 
 ### <a name="prod_drivers"></a> Installing the drivers
 
