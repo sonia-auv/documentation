@@ -276,7 +276,7 @@ We have several scripts that must launch at startup time, here they are:
 
 ## Configure Development Environment <a name="development"></a>
 
-### <a name=""></a> Installing the dependencies
+### <a name="dev_deps"></a> Installing the dependencies
 
 Add the partner repositories in the source list:
 
@@ -294,7 +294,7 @@ You can now install the upgrade and required packages:
 	    tig\
 	    tree
 
-### <a name=""></a> Installing the drivers
+### <a name="dev_drivers"></a> Installing the drivers
 
 	cd /tmp/
     wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
@@ -315,7 +315,7 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
 	sed -i -e '900d' ./pciefd/pciefd_hwif.c
 
-### <a name=""></a> Installing Git
+### <a name="dev_git"></a> Installing Git
 
 	ssh-keygen -t rsa -b 4096 -C "you@email.ext"
 	eval "$(ssh-agent -s)"
@@ -326,7 +326,7 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 
 You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
 
-### <a name=""></a> Working with Eclipse
+### <a name="dev_eclipse"></a> Working with Eclipse
 
 We use Eclipse for our Java development and we also need the C++ plugin that allows us to run and debug C++ code.
 
@@ -360,7 +360,7 @@ You can also configure Eclipse to use our formatting file. You can find it here:
 
 ## Install S.O.N.I.A. Software <a name="software"></a>
 
-### <a name=""></a> Installing AUV6
+### <a name="soft_auv6"></a> Installing AUV6
 
 First of all, install all AUV6 dependencies:
 
@@ -397,7 +397,7 @@ And now build the whole AUV6 system:
 
 That's it ! You can now work with AUV6
 
-### <a name=""></a> Installing AUV7
+### <a name="soft_auv7"></a> Installing AUV7
 
 First of all, you must install ROS and its dependencies:
 
