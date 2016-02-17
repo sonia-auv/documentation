@@ -76,7 +76,8 @@ You can now install the upgrade and required packages:
 	    coriander\
 	    xserver-xorg-lts-utopic\
 	    vim\
-	    tree
+	    tree\
+	    clang-format
 
 ### <a name="prod_modules"></a> Install Devices Modules
 
@@ -411,16 +412,22 @@ We recommend that you install the desktop-full ditribution of ROS even if you do
 	sudo apt-get install -y \
 	    ros-indigo-desktop-full\
 	    python-rosinstall\
-	    ros-indigo-rosjava
+	    ros-indigo-rosjava\
+	    clang-format
 	sudo rosdep init
 	rosdep update
 	source /opt/ros/indigo/setup.bash
+
+Before you can use the repository you will have to make sure to have the file `/usr/bin/clang-format`. If you installed the version 3.5 of `clang-format`, you can use
+
+	sudo ln -sf /usr/bin/clang-format-3.6 /usr/bin/clang-format
 
 You can now clone the AUV7 workspace repository and build it:
 
 	mkdir -p $ROS_SONIA_WS
 	git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
     cd $ROS_SONIA_WS
+    ./install.sh
     ./git_update.sh -d
 	catkin_make -j8
 	source devel/setup.bash
