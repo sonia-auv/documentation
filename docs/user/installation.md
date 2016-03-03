@@ -370,7 +370,7 @@ You can now clone the AUV6 script repository and launch the install script:
 
 	mkdir -p $SONIA_WORKSPACE_ROOT
 	cd $SONIA_WORKSPACE_ROOT
-	git clone ssh://git@sonia.etsmtl.ca:4223/logiciel/sonia-scripts.git
+	git clone ssh://git@private.sonia.etsmtl.ca:4223/logiciel/sonia-scripts.git
 	sh sonia-scripts/git_update_repo.sh
 
 You must change your maven [`settings.xml`](assets/files/settings.xml) file for adding our repo/mirrors:
