@@ -90,115 +90,42 @@ service. See the parameters for more informations.
 ### Parameters
 
 This part is very important. It explains how to use the main service
-of the provider_can, which is `send_can_message`.  
+of the provider_can, which is `send_can_message`. 
 
 `/provider_can/can/send_can_message` (`uint8 device_id`, `uint8 unique_id`,`uint8 method_number`,`float64 parameter_value`,`string string_param`) : returns uint8
+
+As an example, if we want to send speed 50 to the port thruster, we would send this command in a command prompt:
+
+`rosservice call /provider_can/send_can_message 2 1 0 50 ""`
+
+* param device_id = 2 			// DEVICE_ID_actuators (constant defined in SendCanMessage.srv)
+* param unique_id = 1 			// UNIQUE_ID_ACT_port_motor (constant defined in SendCanMessage.srv)
+* param method_number = 0 		// METHOD_MOTOR_set_speed (constant defined in SendCanMessage.srv)
+* param parameter_value = 50 	// speed value
+* param string_param = "" 		// unused
+
+See next sections for more explanations.
+
 
 **Param `device_id`**
 
 `device_id` represents the ID number of a specific class of devices, such as
 actuator or sensors. The IDs are all defined as constants in `send_can_message` service.
 
-`device_id` list:
-
-* DEVICE_ID_controllers
-* DEVICE_ID_actuators
-* DEVICE_ID_markers
-* DEVICE_ID_sonars
-* DEVICE_ID_sensors
-* DEVICE_ID_power
-* DEVICE_ID_interfaces
-* DEVICE_ID_lights
-* DEVICE_ID_can2rs232
 
 **Param `unique_id`:**
 
 unique_id represents the ID number of a specific device in a device_id class.
 The IDs are all defined as constants in `send_can_message` service.
 
-`unique_id` list, separated by `device_id`: 
-
-* DEVICE_ID_actuators
-	* UNIQUE_ID_ACT_port_motor
-	* UNIQUE_ID_ACT_starboard_motor
-	* UNIQUE_ID_ACT_front_heading_motor
-	* UNIQUE_ID_ACT_back_heading_motor
-	* UNIQUE_ID_ACT_front_depth_motor
-	* UNIQUE_ID_ACT_back_depth_motor
-	* UNIQUE_ID_ACT_grabber
-*  DEVICE_ID_markers
-	* UNIQUE_ID_MARK_dropper
-	* UNIQUE_ID_MARK_launcher
-* DEVICE_ID_sonars
-	* UNIQUE_ID_SONAR_passive 
-	* UNIQUE_ID_SONAR_active
-* DEVICE_ID_sensors
-	* UNIQUE_ID_SENSORS_barometer
-* DEVICE_ID_power
-	* UNIQUE_ID_POWER_power_distribution
-* DEVICE_ID_interfaces
-	* UNIQUE_ID_INTERFACE_diver
-	* UNIQUE_ID_INTERFACE_mission_switch
-	* UNIQUE_ID_INTERFACE_cartenav_exceptions // will disappear
-* DEVICE_ID_lights
-	* UNIQUE_ID_LIGHT_bottom_light
-	* UNIQUE_ID_LIGHT_led_indicator
 	
 **Param `method_number` and `parameter_value`:**
 
 `method_number` is the method you want to call from the specified device. Some methods  
 are common to all devices. `parameter_value` is the only possible parameter of that method.
-Note: diver_interface has a string parameter.
+Note: diver_interface has a string parameter. All methods numbers are defined as contants in the service .srv file.
 
 
-**`method_number` list and `parameter_value`:**
-
-* uint8 METHOD_COMMON_ping_req				// No parameter
-* uint8 METHOD_COMMON_presence_check			// No parameter
-* uint8 METHOD_COMMON_get_properties			// No parameter
-
-* uint8 METHOD_BOTLIGTH_set_level				// Param: Level (0 to 100)
-
-* uint8 METHOD_PSU_pc_reset					// No param
-* uint8 METHOD_PSU_remote_kill				// Remote = 1, not remote = 0
-* uint8 METHOD_PSU_set_channel				// Param: Power channel (see methods parameters)
-* uint8 METHOD_PSU_clr_channel				// Param: Power channel (see methods parameters)
-
-* uint8 METHOD_MOTOR_set_speed				// Param: Speed (-100 to 100)
-
-* uint8 METHOD_GRABBER_port_set_target		// Param: target
-* uint8 METHOD_GRABBER_starboard_set_target 	// Param: target
-
-* uint8 METHOD_DIVER_set_mission_string		// Param: none. 
-* uint8 METHOD_DIVER_set_state_string			// Param: none.
-
-* uint8 METHOD_LED_set_mode					// Param: Mode (see methods parameters)
-* uint8 METHOD_LED_set_color					// Param: Color (see methods parameters)
-
-**`parameter_value` constants:**
-
-* PSU_CHAN_BUS_12V1
-* PSU_CHAN_BUS_12V2
-* PSU_CHAN_PC
-* PSU_CHAN_MOTOR1
-* PSU_CHAN_MOTOR2
-* PSU_CHAN_MOTOR3
-* PSU_CHAN_DVL
-* PSU_CHAN_ACTUATORS
-* PSU_CHAN_LIGHT
-
-* LED_MODE_INDICATOR_OFF
-* LED_MODE_BLINK_MODE
-* LED_MODE_INDICATOR_ON
-* LED_MODE_RAINBOW
-
-* LED_COLOR_BLACK
-* LED_COLOR_RED
-* LED_COLOR_YELLOW
-* LED_COLOR_CYAN
-* LED_COLOR_GREEN 
-* LED_COLOR_WHITE
-* LED_COLOR_BLUE
 
 **Param `string_param`**
 
