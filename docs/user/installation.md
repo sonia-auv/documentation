@@ -166,12 +166,16 @@ This is it ! You are now able to add remotes to the submarine on your developmen
 
 ### <a name="prod_drivers"></a> Installing the drivers
 
-	cd /tmp/
-    wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
+	go to this website:  https://www.kvaser.com/getting-started/#?ean=7330130002432 
+	
+	and download KVaser Linux Driver and SDK. Make sure the files are downloaded into "home/Downloads"
+
+	On a command prompt:
+	cd /Downloads/
     tar zxvf linuxcan.tar.gz
 	cd ./linuxcan
 	make -j8
-	make install
+	sudo make install
     cd ../
     rm -r linuxcan linuxcan.tar.gz
 	
