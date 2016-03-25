@@ -47,11 +47,11 @@ the configurations of the CAN drivers. The content of the yaml file is shown bel
 * provider_can/driver/usb_device: "KVaser"
 
 **baudrate**: CAN baudrate values, in kHz. possible values are: 50, 62, 100, 125, 250 and 1000. 
-Actual config is 125.
-**device_id** and **unique_id**: Computer ID. This is the CAN ID that will be used by the provider_can when sending broadcast messages.
-See Electrical section in the Wiki page for more inforamtions about IDs.
-**channel**: KVaser bus channel to use. 
-**usb_device**: Actually, only one CAN device is possible, which is KVaser. All KVaser devices use the same librairies.
+Actual config is 125.  
+**device_id** and **unique_id**: Computer ID. This is the CAN ID that will be used by the provider_can when sending broadcast messages.  
+See Electrical section in the Wiki page for more inforamtions about IDs.  
+**channel**: KVaser bus channel to use.  
+**usb_device**: Actually, only one CAN device is possible, which is KVaser. All KVaser devices use the same librairies.  
 
 ## ROS Node
 
