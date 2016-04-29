@@ -32,7 +32,7 @@ This will start the CAN communication system and open all the published topics.
 
 ### Class Diagrams
 
-### INS Flowcharts
+<img src="/assets/img/provider_can_class_diagram.png" alt="Class Diagram" style="width: 500px;"/>
 
 ## Configuration file
 
