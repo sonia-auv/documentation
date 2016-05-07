@@ -4,9 +4,9 @@
 export SONIA_WORKSPACE_ROOT=~/sonia_ws
 export ROS_SONIA_WS=~/ros_sonia_ws/
 export SONIA_SCRIPTS=$SONIA_WORKSPACE_ROOT/sonia-scripts/
-export ROS_HOSTNAME=localhost
+export ROS_HOSTNAME=192.168.0.11
+# export ROS_IP=192.168.0.11
 export ROS_MASTER_URI=http://192.168.0.11:11311
-export ROS_IP=192.168.0.11
 export ROS_HOME=$ROS_SONIA_WS
 export LC_ALL="en_US.UTF-8"
 export EDITOR="vim"
@@ -53,8 +53,3 @@ alias sbu="cd $SONIA_SCRIPTS; ./build_auv_dependencies.sh; cd -"
 alias logpack='mkdir $SONIA_WORKSPACE_ROOT/log/package 2>>/dev/null;find \
     . \( \! -iname "*\.raw*" \) -type f|xargs -n1 -i cp -f \
     --parents {} $SONIA_WORKSPACE_ROOT/log/package/'
-
-$SONIA_SCRIPTS/checkCores.sh
-# $SONIA_SCRIPTS/checkDisks.sh
-# $SONIA_SCRIPTS/checkCamera.sh
-# $SONIA_SCRIPTS/check-svn.sh
