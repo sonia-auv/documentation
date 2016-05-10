@@ -47,12 +47,16 @@ Set the password of the `root` user:
 
 	sudo passwd root
 	sudo usermod -U root
-	sudo bash -c "echo -e \"[SeatDefaults]\ngreeter-show-manual-login=true\" >> /etc/lightdm/lightdm.conf"cd
 
 Then login with `root` and delete the user `sonia`:
 
 	userdel sonia
 	rm -rf /home/sonia
+	
+If you are installing an Ubuntu Desktop version, you can type this command to allow you to boot with `root` user graphically:
+
+!!!Note
+	sudo bash -c "echo -e \"[SeatDefaults]\ngreeter-show-manual-login=true\" >> /etc/lightdm/lightdm.conf"
 
 ### <a name="prod_deps"></a> Installing the dependencies
 
@@ -77,7 +81,8 @@ You can now install the upgrade and required packages:
 	    xserver-xorg-lts-utopic\
 	    vim\
 	    tree\
-	    clang-format
+	    clang-format\
+	    htop
 
 ### <a name="prod_modules"></a> Install Devices Modules
 
@@ -260,11 +265,6 @@ And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this confi
 
 	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
 
-!!!Note
-	If you are running a development environment, prefere adding the following configuration:
-
-		wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
-
 Then resource your `.bashrc`:
 
 	source ~/.bashrc
@@ -329,6 +329,59 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 	git config --global push.default simple
 
 You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
+
+### <a name="prod_cli"></a> Configure CLI and aliases
+
+Now install bash_it in order to have a better command line interface:
+
+	git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+	~/.bash_it/install.sh
+	rm ~/.bashrc.bak
+	sed -i -e 's/bobby/nwinkler/g' ~/.bashrc
+
+Now edit your `~/.bashrc` and add the following configuration at the beginning of the file:
+
+	# If not running interactively, con't do anything
+	case $- in
+	    *i*) ;;
+	      *) return;;
+	esac
+
+	if ! shopt -oq posix; then
+	  if [ -f /usr/share/bash-completion/bash_completion ]; then
+	    . /usr/share/bash-completion/bash_completion
+	  elif [ -f /etc/bash_completion ]; then
+	    . /etc/bash_completion
+	  fi
+	fi
+
+And source the other bash files at the end of your file:
+
+	# Load common aliases
+	if [ -f ~/.bash_aliases ]; then
+	    . ~/.bash_aliases
+	fi
+	
+	# Load SONIA Configuration
+	if [ -f ~/.bash_sonia ]; then
+	    . ~/.bash_sonia
+	fi
+
+You can download the sample bashrc file here:
+
+	wget http://sonia-auv.readthedocs.org/assets/files/bashrc -O ~/.bashrc
+
+You can now add the file [`~/.bash_aliases`](assets/files/bash_aliases) with the following configuration:
+
+	wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
+
+And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this configuration:
+
+	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
+
+Then resource your `.bashrc`:
+
+	source ~/.bashrc
 
 ### <a name="dev_eclipse"></a> Working with Eclipse
 
