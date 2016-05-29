@@ -194,7 +194,10 @@ In order to install the Dalsa Drivers for the GigE visions camera, you can do th
 	wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
 	tar zxvf DALSA.tar.gz
 	cd DALSA
+	aptitude install -y gcc make libglade2-dev libX11-dev libxext-dev libcap ethtool
 	./coreinstall
+
+You can then reboot in order to make the driver work.
 
 ### <a name="prod_dirs"></a> Setup directories
 
