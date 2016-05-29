@@ -171,18 +171,13 @@ This is it ! You are now able to add remotes to the submarine on your developmen
 
 ### <a name="prod_drivers"></a> Installing the drivers
 
-	go to this website:  https://www.kvaser.com/getting-started/#?ean=7330130002432 
-	
-	and download KVaser Linux Driver and SDK. Make sure the files are downloaded into "home/Downloads"
+In order to install the version 5.15.0 of the Kvaser driver, you can type the following command lines:
 
-	On a command prompt:
-	cd /Downloads/
+	wget http://www.kvaser.com/software/7330130980754/V5_15_0/linuxcan.tar.gz
     tar zxvf linuxcan.tar.gz
 	cd ./linuxcan
 	make -j8
 	sudo make install
-    cd ../
-    rm -r linuxcan linuxcan.tar.gz
 	
 During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
 
@@ -193,6 +188,13 @@ During the installation of the CAN Libraries, if you have any trouble with the `
 	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
 	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
 	sed -i -e '900d' ./pciefd/pciefd_hwif.c
+
+In order to install the Dalsa Drivers for the GigE visions camera, you can do the following:
+
+	wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
+	tar zxvf DALSA.tar.gz
+	cd DALSA
+	./coreinstall
 
 ### <a name="prod_dirs"></a> Setup directories
 
