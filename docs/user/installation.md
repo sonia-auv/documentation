@@ -479,6 +479,10 @@ We recommend that you install the desktop-full ditribution of ROS even if you do
 	sudo rosdep init
 	rosdep update
 	source /opt/ros/indigo/setup.bash
+	
+In order to build can_client interface for CAN communication, you need to install QWT:
+
+	sudo apt-get install libqwt5-qt4
 
 Before you can use the repository you will have to make sure to have the file `/usr/bin/clang-format`. If you installed the version 3.5 of `clang-format`, you can use
 
@@ -492,6 +496,14 @@ You can now clone the AUV7 workspace repository and build it:
     ./install.sh
     ./git_update.sh -d
 	catkin_make -j8
+	source devel/setup.bash
+	
+If you want to use can_client node:
+
+	cd $ROS_SONIA_WS/src/
+    git clone git@github.com:sonia-auv/rqt_can_client.git
+    cd ..
+    catkin_make -j8
 	source devel/setup.bash
 
 That's it ! You can now work with AUV7
