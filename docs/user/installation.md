@@ -52,7 +52,7 @@ Then login with `root` and delete the user `sonia`:
 
 	userdel sonia
 	rm -rf /home/sonia
-	
+
 If you are installing an Ubuntu Desktop version, you can type this command to allow you to boot with `root` user graphically:
 
 !!!Note
@@ -113,11 +113,11 @@ Open the file `/etc/network/interfaces`, it should look like this:
 
 	# This file describes the network interfaces available on your system
 	# and how to activate them. For more information, see interfaces(5).
-	
+
 	# The loopback network interface
 	auto lo
 	iface lo inet loopback
-	
+
 	# The primary network interface
 	auto em1
 	iface em1 inet static
@@ -156,15 +156,15 @@ You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~
 We also need to setup a git server in order to be able to push changes on the submarine when there is no internet access. To do so, create a git user and setup the `.ssh` directory:
 
 	touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
-	
+
 When this has been done, you can add your ssh key to the server. If your public key is located in `~/.ssh/id_rsa.pub`, the following command will add your key on the submarine:
 
 	cat ~/.ssh/id_rsa.pub | ssh root@192.168.0.11 'dd of=.ssh/authorized_keys oflag=append conv=notrunc'
-	
+
 Finally, on the production environment, you will have to enable pushing on non-bar repository, do to so, type:
 
 	git config --global receive.denyCurrentBranch warn
-	
+
 This is it ! You are now able to add remotes to the submarine on your development environment. The command for adding the ros_sonia_ws repository is the following:
 
 	git remote add auv root@192.168.0.11:/root/ros_sonia_ws/
@@ -178,7 +178,7 @@ In order to install the version 5.15.0 of the Kvaser driver, you can type the fo
 	cd ./linuxcan
 	make -j8
 	sudo make install
-	
+
 During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
 
 	sed -i -e '2293d' ./leaf/leafHWIf.c
@@ -206,7 +206,7 @@ Create a directory called `Workspace` in your home directory and link `/sonia` t
 	cd ~
 	mkdir sonia_ws
     mkdir ros_sonia_ws
-	
+
 ### <a name="prod_checks"></a> Disable few startup checks
 
 In order to disable the partition checks on startup, type this:
@@ -252,7 +252,7 @@ And source the other bash files at the end of your file:
 	if [ -f ~/.bash_aliases ]; then
 	    . ~/.bash_aliases
 	fi
-	
+
 	# Load SONIA Configuration
 	if [ -f ~/.bash_sonia ]; then
 	    . ~/.bash_sonia
@@ -313,8 +313,8 @@ You can now install the upgrade and required packages:
 	make install
     cd ../
     rm -r linuxcan linuxcan.tar.gz
-	
-During the installation of the CAN Libraries, if you have any trouble with the `-Werror=date-time` CFLAG, you can delete these line as a workaround :
+
+ TROUBLESHOOTING : If you have any trouble with the `-Werror=date-time` CFLAG during the installation of the CAN Libraries, you can delete these line as a workaround :
 
 	sed -i -e '2293d' ./leaf/leafHWIf.c
 	sed -i -e '2293d' ./leaf/leafHWIf.c
@@ -366,7 +366,7 @@ And source the other bash files at the end of your file:
 	if [ -f ~/.bash_aliases ]; then
 	    . ~/.bash_aliases
 	fi
-	
+
 	# Load SONIA Configuration
 	if [ -f ~/.bash_sonia ]; then
 	    . ~/.bash_sonia
@@ -388,76 +388,7 @@ Then resource your `.bashrc`:
 
 	source ~/.bashrc
 
-### <a name="dev_eclipse"></a> Working with Eclipse
-
-We use Eclipse for our Java development and we also need the C++ plugin that allows us to run and debug C++ code.
-
-First, you need to download the last version on [eclipse website](https://www.eclipse.org/downloads/):
-
-	cd
-	wget http://eclipse.mirror.rafal.ca/technology/epp/downloads/release/mars/1/eclipse-java-mars-1-linux-gtk-x86_64.tar.gz
-	tar zxvf eclipse-java-mars-1-linux-gtk-x86_64.tar.gz
-	sudo mv eclipse /opt/eclipse
-
-!!! note
-
-	You will need these plugin to work with our AUV6/AUV7 software:
-	
-	- maven - http://download.eclipse.org/technology/m2e/releases
-		- m2e - Maven Integration for Eclipse
-		- m2e connector for xmlbeans
-	- pydev - http://pydev.org/updates
-		- pydev for eclipse
-	- egit - http://download.eclipse.org/egit/updates
-		- Eclipse Git Team provider
-	- cdt - http://download.eclipse.org/tools/cdt/releases/8.5
-		- C/C++ development tools
-	- windows build - outil pour interface swing - http://dl.google.com/eclipse/inst/d2wbpro/latest/3.7
-		- Swing Designer
-		- WindowsBuild Engine (Required)
-
-You can also configure Eclipse to use our formatting file. You can find it here:
-
-	wget http://sonia-auv.readthedocs.org/assets/files/sonia-formatter.epf
-
 ## Install S.O.N.I.A. Software <a name="software"></a>
-
-### <a name="soft_auv6"></a> Installing AUV6
-
-First of all, install all AUV6 dependencies:
-
-	 aptitude install -y openjdk-7-jdk scons build-essential maven2
-
-You can now clone the AUV6 script repository and launch the install script:
-
-	mkdir -p $SONIA_WORKSPACE_ROOT
-	cd $SONIA_WORKSPACE_ROOT
-	git@bitbucket.org:sonia-auv/sonia-scripts.git
-	sh sonia-scripts/git_update_repo.sh
-
-You must change your maven [`settings.xml`](assets/files/settings.xml) file for adding our repo/mirrors:
-
-	mkdir -p ~/.m2
-	wget http://sonia-auv.readthedocs.org/assets/files/settings.xml -O ~/.m2/settings.xml
-	    
-	
-You can now build the CAN server:
-
-	cd $SONIA_WORKSPACE_ROOT/can-server
-	scons
-
-And now build the whole AUV6 system:
-
-	cd $SONIA_WORKSPACE_ROOT/sonia-jaus-library
-    mvn clean install
-    cd $SONIA_WORKSPACE_ROOT/octets-common
-    mvn clean install
-    cd $SONIA_WORKSPACE_ROOT/auv-mission-library
-    mvn clean install
-    cd $SONIA_WORKSPACE_ROOT/auv6
-	mvn clean install
-
-That's it ! You can now work with AUV6
 
 ### <a name="soft_auv7"></a> Installing AUV7
 
@@ -474,12 +405,11 @@ We recommend that you install the desktop-full ditribution of ROS even if you do
 	sudo apt-get install -y \
 	    ros-indigo-desktop-full\
 	    python-rosinstall\
-	    ros-indigo-rosjava\
-	    clang-format
+	    clang-format-3.8
 	sudo rosdep init
 	rosdep update
 	source /opt/ros/indigo/setup.bash
-	
+
 In order to build can_client interface for CAN communication, you need to install QWT:
 
 	sudo apt-get install libqwt5-qt4
@@ -494,10 +424,10 @@ You can now clone the AUV7 workspace repository and build it:
 	git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
     cd $ROS_SONIA_WS
     ./install.sh
-    ./git_update.sh -d
+    ./git_update.sh
 	catkin_make -j8
 	source devel/setup.bash
-	
+
 If you want to use can_client node:
 
 	cd $ROS_SONIA_WS/src/
