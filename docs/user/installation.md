@@ -34,9 +34,7 @@ You will find the details on how to install and configure you environment on all
     - [Installing the dependencies](#dev_deps)
     - [Installing the drivers](#dev_drivers)
     - [Installing Git](#dev_git)
-    - [Working with Eclipse](#dev_eclipse)
 - [Install our softwares](#software)
-    - [Installing AUV6](#soft_auv6)
     - [Installing AUV7](#soft_auv7)
 
 ## Configure Production Environment <a name="production"></a>
