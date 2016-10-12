@@ -403,7 +403,8 @@ We recommend that you install the desktop-full ditribution of ROS even if you do
 	sudo apt-get install -y \
 	    ros-indigo-desktop-full\
 	    python-rosinstall\
-	    clang-format-3.8
+	    clang-format-3.8\
+	    openjdk-7-jdk
 	sudo rosdep init
 	rosdep update
 	source /opt/ros/indigo/setup.bash
