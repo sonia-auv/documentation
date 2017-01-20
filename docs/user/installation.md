@@ -390,49 +390,14 @@ Then resource your `.bashrc`:
 
 ### <a name="soft_auv7"></a> Installing AUV7
 
-First of all, you must install ROS and its dependencies:
+Installing software is really simple, just execute the following command and enjoy the show (Be aware that at some point you might need to do some actions[ i.e press ENTER]):
 
-	sudo sh -c \
-	    'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" >\
-	    /etc/apt/sources.list.d/ros-latest.list'
-	sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 --recv-key 0xB01FA116
-	sudo apt-get update
-
-We recommend that you install the desktop-full ditribution of ROS even if you do not use the GUI provided. This distribution provides several packages that we may use in our softwares.
-
-	sudo apt-get install -y \
-	    ros-indigo-desktop-full\
-	    python-rosinstall\
-	    clang-format-3.8\
-	    openjdk-7-jdk
-	sudo rosdep init
-	rosdep update
-	source /opt/ros/indigo/setup.bash
-
-In order to build can_client interface for CAN communication, you need to install QWT:
-
-	sudo apt-get install libqwt5-qt4
-
-Before you can use the repository you will have to make sure to have the file `/usr/bin/clang-format`. If you installed the version 3.5 of `clang-format`, you can use
-
-	sudo ln -sf /usr/bin/clang-format-3.6 /usr/bin/clang-format
-
-You can now clone the AUV7 workspace repository and build it:
-
-	mkdir -p $ROS_SONIA_WS
-	git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
-    cd $ROS_SONIA_WS
-    ./install.sh
-    ./git_update.sh
-	catkin_make -j8
-	source devel/setup.bash
-
-If you want to use can_client node:
-
-	cd $ROS_SONIA_WS/src/
-    git clone git@github.com:sonia-auv/rqt_can_client.git
-    cd ..
-    catkin_make -j8
-	source devel/setup.bash
-
+	cd ~
+	wget http://sonia-auv.readthedocs.org/assets/files/sonia-install-1 -O ~/sonia-install-1
+	wget http://sonia-auv.readthedocs.org/assets/files/sonia-install-2 -O ~/sonia-install-2
+	sudo chmod +x sonia-install-1 sonia-install-2
+	sh sonia-install-1
+	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
+	sh sonia-install-2
+	
 That's it ! You can now work with AUV7
