@@ -1,0 +1,114 @@
+sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+
+sudo apt install -y make cmake git tig tree vim
+
+
+cd /tmp/
+## New version of linuxcan
+wget http://www.kvaser.com/software/7330130980754/V5_18_0/linuxcan.tar.gz
+tar zxvf linuxcan.tar.gz
+cd ./linuxcan
+make -j8
+sudo make install
+cd ../
+sudo rm -rf linuxcan linuxcan.tar.gz
+
+cd /opt
+sudo wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
+sudo tar zxvf DALSA.tar.gz
+cd DALSA
+## rm two software to install
+sudo apt install -y gcc make libglade2-dev libxext-dev ethtool
+./corinstall
+
+
+echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
+echo "  . ~/.bash_sonia" >> ~/.bashrc
+echo "fi" >> ~/.bashrc
+
+wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
+wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
+
+source ~/.bashrc
+
+
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo apt-get update
+
+sudo apt-get install -y ros-kinetic-desktop-full python-rosinstall clang-format-3.8 --fix-missing
+sudo apt-get install -y libqwt-dev libdc1394-22-dev
+
+source /opt/ros/kinetic/setup.bash
+
+## sudo apt-get install libqwt5-qt4
+
+## ADD ssh key on github before pulling git
+ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+
+cat ~/.ssh/id_rsa.pub
+echo "Reboot PC"
+read test
+reboot
+
+# SET GITHUB AND REBOOT PC to be compliant we DALSA driver
+.
+
+
+git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
+cd $ROS_SONIA_WS
+git checkout kinetic
+./git_update.sh
+sudo ldconfig
+sudo rosdep init
+rosdep update
+catkin_make -j8
+source devel/setup.bash
+
+
+
+
+
+migration NOTE
+http://kdab.developpez.com/tutoriels/cmake-qt-5/
+
+CMakeLists.txt
+find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED) --> find_package(Qt5Widgets REQUIRED)
+include( ${QT_USE_FILE} ) --> (${Qt5Widgets_INCLUDES})
+# Add definitions
+ADD_DEFINITIONS(${Qt5Widgets_DEFINITIONS})
+SET(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+
+# Qt5Widgets_LIBRARIES contient aussi QtGui et QtCore
+target_link_library QT4 -- >${Qt5Widgets_LIBRARIES}
+
+qt4_wrap_cpp( can_client_QT_MOC ${can_client_HDR_FILES} ) --> qt5_wrap_cpp( can_client_QT_MOC ${can_client_HDR_FILES} )
+qt4_wrap_cpp( can_client_QT_MOC ${can_client_HDR_FILES} ) -->qt5_wrap_ui( can_client_QT_UIS ${can_client_UIS} )
+
+gui_vision_client:
+Qt:WFlags --> Qt:WindowFlags
+
+#include <opencv2/core/core.hpp> --> #include <opencv2/core.hpp>
+
+cv::line
+#include <opencv2/core/core.hpp> --> #include <opencv2/imgproc.hpp>
+
+
+
+Generating reconfiguration files for Camera_Parameters_ in provider_vision
+In file included from /home/sonia/Workspaces/ros_sonia_ws/src/proc_mapping/src/proc_mapping/map/object_registery.h:31:0,
+                 from /home/sonia/Workspaces/ros_sonia_ws/src/proc_mapping/src/proc_mapping/map/object_registery.cc:26:
+/home/sonia/Workspaces/ros_sonia_ws/src/proc_mapping/src/proc_mapping/map_objects/map_object.h:30:34: fatal error: sonia_msgs/MapObject.h: No such file or directory
+compilation terminated.
+proc_mapping/CMakeFiles/proc_mapping_node.dir/build.make:110: recipe for target 'proc_mapping/CMakeFiles/proc_mapping_node.dir/src/proc_mapping/map/object_registery.cc.o' failed
+make[2]: *** [proc_mapping/CMakeFiles/proc_mapping_node.dir/src/proc_mapping/map/object_registery.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+Generating reconfiguration files for Algorithm in proc_control
+[ 90%] Built target provider_vision_gencfg
+
+
+
+
