@@ -283,57 +283,7 @@ We have several scripts that must launch at startup time, here they are:
 
 ## Configure Development Environment <a name="development"></a>
 
-### <a name="dev_deps"></a> Installing the dependencies
-
-Add the partner repositories in the source list:
-
-	sed -i '/http:\/\/archive.canonical.com\/ubuntu trusty partner/s/^# //g' /etc/apt/sources.list
-
-You can now install the upgrade and required packages:
-
-	aptitude update
-	aptitude upgrade -y
-	aptitude dist-upgrade -y
-	aptitude install -y \
-	    make\
-	    cmake\
-	    git\
-	    tig\
-	    tree
-
-### <a name="dev_drivers"></a> Installing the drivers
-
-	cd /tmp/
-    wget http://www.kvaser.com/software/7330130980754/V5_12_0/linuxcan.tar.gz
-    tar zxvf linuxcan.tar.gz
-	cd ./linuxcan
-	make -j8
-	make install
-    cd ../
-    rm -r linuxcan linuxcan.tar.gz
-
- TROUBLESHOOTING : If you have any trouble with the `-Werror=date-time` CFLAG during the installation of the CAN Libraries, you can delete these line as a workaround :
-
-	sed -i -e '2293d' ./leaf/leafHWIf.c
-	sed -i -e '2293d' ./leaf/leafHWIf.c
-	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
-	sed -i -e '2123d' ./mhydra/mhydraHWIf.c
-	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
-	sed -i -e '1757d' ./usbcanII/usbcanHWIf.c
-	sed -i -e '900d' ./pciefd/pciefd_hwif.c
-
-### <a name="dev_git"></a> Installing Git
-
-	ssh-keygen -t rsa -b 4096 -C "you@email.ext"
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_rsa
-	git config --global user.name "Your Name"
-	git config --global user.email you@email.ext
-	git config --global push.default simple
-
-You can now add the content of `~/.ssh/id_rsa.pub` to your Github/Gitlab: `cat ~/.ssh/id_rsa.pub`
-
-### <a name="prod_cli"></a> Configure CLI and aliases
+### <a name="prod_cli"></a> Install Bash_IT
 
 Now install bash_it in order to have a better command line interface:
 
@@ -357,30 +307,6 @@ Now edit your `~/.bashrc` and add the following configuration at the beginning o
 	    . /etc/bash_completion
 	  fi
 	fi
-
-And source the other bash files at the end of your file:
-
-	# Load common aliases
-	if [ -f ~/.bash_aliases ]; then
-	    . ~/.bash_aliases
-	fi
-
-	# Load SONIA Configuration
-	if [ -f ~/.bash_sonia ]; then
-	    . ~/.bash_sonia
-	fi
-
-You can download the sample bashrc file here:
-
-	wget http://sonia-auv.readthedocs.org/assets/files/bashrc -O ~/.bashrc
-
-You can now add the file [`~/.bash_aliases`](assets/files/bash_aliases) with the following configuration:
-
-	wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
-
-And then add the file [`~/.bash_sonia`](assets/files/bash_sonia) with this configuration:
-
-	wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
 
 Then resource your `.bashrc`:
 
