@@ -399,5 +399,7 @@ Installing software is really simple, just execute the following command and enj
 	sh sonia-install-1
 	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
 	sh sonia-install-2
+	# Then remove the two files
+	rm sonia-install-1 sonia-install-2
 	
 That's it ! You can now work with AUV7
