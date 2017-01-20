@@ -1,0 +1,9 @@
+git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
+cd $ROS_SONIA_WS
+git checkout kinetic
+./git_update.sh
+sudo ldconfig
+sudo rosdep init
+rosdep update
+catkin_make -j8
+source devel/setup.bash
