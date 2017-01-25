@@ -13,7 +13,7 @@ export EDITOR="vim"
 export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 
 ## ROS specific configurations
-source /opt/ros/indigo/setup.bash
+source /opt/ros/kinetic/setup.bash
 if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
