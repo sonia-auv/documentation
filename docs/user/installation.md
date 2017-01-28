@@ -327,5 +327,28 @@ Installing software is really simple, just execute the following command and enj
 	sh sonia-install-2
 	# Then remove the two files
 	rm sonia-install-1 sonia-install-2
+
+If you have a NVIDIA GPU:
+	# Should note have any update since it's a clean install.
+	sudo apt-get update
+	sudo apt-get upgrade
+
+	# Get kernel version ex. 4.4.0-59-generic
+	uname -r
+	# Ensure header are install (it should since it is a clean install)
+	sudo apt-get install linux-headers-<kernel_number>
+
+	# Get the recommended driver from nvidia (it is written next to it.)
+	# ex:
+	# driver   : nvidia-367 - distro non-free recommended 
+
+	sudo ubuntu-drivers devices
+	sudo apt-get install nvidia-XXX nvidia-prime
+
+	# Setup the xorg file.
+	sudo nvidia-xconfig
+
+	# Reboot and all good! If not, open nvidia-settings UI program and set the resolution to your screen
+	# resolution.
 	
 That's it ! You can now work with AUV7
