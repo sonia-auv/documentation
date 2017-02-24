@@ -329,7 +329,8 @@ Installing software is really simple, just execute the following command and enj
 	rm sonia-install-1 sonia-install-2
 
 If you have a NVIDIA GPU:
-	# Should note have any update since it's a clean install.
+
+	# Should not have any update since it's a clean install.
 	sudo apt-get update
 	sudo apt-get upgrade
 
