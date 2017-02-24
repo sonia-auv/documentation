@@ -333,10 +333,8 @@ If you have a NVIDIA GPU:
 	sudo apt-get update
 	sudo apt-get upgrade
 
-	# Get kernel version ex. 4.4.0-59-generic
-	uname -r
-	# Ensure header are install (it should since it is a clean install)
-	sudo apt-get install linux-headers-<kernel_number>
+	# Ensure headers are installed (it should since it is a clean install)
+	sudo apt-get install linux-headers-$(uname -r)
 
 	# Get the recommended driver from nvidia (it is written next to it.)
 	# ex:
