@@ -308,6 +308,18 @@ Now edit your `~/.bashrc` and add the following configuration at the beginning o
 	  fi
 	fi
 
+And source the other bash files at the end of your file:
+
+	# Load common aliases
+	if [ -f ~/.bash_aliases ]; then
+	    . ~/.bash_aliases
+	fi
+
+	# Load SONIA Configuration
+	if [ -f ~/.bash_sonia ]; then
+	    . ~/.bash_sonia
+	fi
+
 Then resource your `.bashrc`:
 
 	source ~/.bashrc
