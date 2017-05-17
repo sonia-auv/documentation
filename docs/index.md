@@ -36,6 +36,7 @@ This documentation is organized into a couple section:
 - [Provider CAN](software/provider_can.md)
 - [Proc Vision](software/proc_vision.md)
 - [Proc Navigation](software/proc_navigation.md)
+- [Proc Mapping](software/proc_mapping.md)
 
 ## Electrical Documentation <a name="electrical"></a>
 

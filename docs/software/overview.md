@@ -47,5 +47,10 @@ Controllers
 Libraries
 ---------
 
+S.O.N.I.A. Software uses multiples librairies.
+
+- Armadillo is used for linear algebra
+- Mlpack (with Armadillo) for algorithm. See Proc Mapping
+
 GUI
 ---
