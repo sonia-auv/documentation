@@ -40,8 +40,8 @@ sudo apt-get install -y ros-kinetic-desktop-full python-rosinstall clang-format-
 sudo apt-get install -y libqwt-dev libdc1394-22-dev
 
 ## Adding librairies
-sudo apt-get install libmlpack-dev
-sudo apt-get install libarmadillo-dev
+sudo apt-get install -y libmlpack-dev
+sudo apt-get install -y libarmadillo-dev
 
 ## Apply an update on code. Lib can now be compiled on Ubuntu. Issue : https://github.com/mlpack/mlpack/issues/522
 sudo sed -i 's/isinf(cNorm)/std::isinf(cNorm)/g;s/isnan(cNorm)/std::isnan(cNorm)/' /usr/include/mlpack/methods/kmeans/kmeans_impl.hpp
