@@ -39,6 +39,13 @@ sudo apt-get update
 sudo apt-get install -y ros-kinetic-desktop-full python-rosinstall clang-format-3.8 --fix-missing
 sudo apt-get install -y libqwt-dev libdc1394-22-dev
 
+## Adding librairies
+sudo apt-get install libmlpack-dev
+sudo apt-get install libarmadillo-dev
+
+## Apply an update on code. Lib can now be compiled on Ubuntu. Issue : https://github.com/mlpack/mlpack/issues/522
+sudo sed -i 's/isinf(cNorm)/std::isinf(cNorm)/g;s/isnan(cNorm)/std::isnan(cNorm)/' /usr/include/mlpack/methods/kmeans/kmeans_impl.hpp
+
 source /opt/ros/kinetic/setup.bash
 
 ## sudo apt-get install libqwt5-qt4
