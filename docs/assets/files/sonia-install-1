@@ -21,8 +21,8 @@ sudo apt install -y gcc make libglade2-dev libxext-dev ethtool
 ./corinstall
 
 ## install virtualenv for python3
-sudo apt-get install -y python3-pip
-sudo pip3 install virtualenv virtualenvwrapper
+sudo apt-get install -y python-pip
+sudo pip install virtualenv virtualenvwrapper
 
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
 echo "  . ~/.bash_sonia" >> ~/.bashrc
