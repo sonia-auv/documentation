@@ -14,7 +14,6 @@ export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 ## ROS specific configurations
