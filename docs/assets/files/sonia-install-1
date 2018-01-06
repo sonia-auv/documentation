@@ -20,6 +20,9 @@ cd DALSA
 sudo apt install -y gcc make libglade2-dev libxext-dev ethtool
 ./corinstall
 
+## install virtualenv for python3
+sudo apt-get install -y python3-pip
+sudo pip3 install virtualenv virtualenvwrapper
 
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
 echo "  . ~/.bash_sonia" >> ~/.bashrc
@@ -49,10 +52,7 @@ source /opt/ros/kinetic/setup.bash
 
 ## sudo apt-get install libqwt5-qt4
 
-## install virtualenv for python3
-sudo apt-get install -y python3-pip
-sudo pip3 install virtualenv virtualenvwrapper
-
+## create a virtualenv for python3
 mkvirtualenv virtual_babe -p python3
 
 ## ADD ssh key on github before pulling git
