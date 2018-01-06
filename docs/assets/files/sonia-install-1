@@ -53,6 +53,7 @@ source /opt/ros/kinetic/setup.bash
 ## sudo apt-get install libqwt5-qt4
 
 ## create a virtualenv for python3
+source ~/.bashrc
 mkvirtualenv virtual_babe -p python3
 
 ## ADD ssh key on github before pulling git
