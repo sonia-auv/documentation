@@ -2,7 +2,6 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
 
 sudo apt install -y make cmake git tig tree vim
 
-
 cd /tmp/
 ## New version of linuxcan
 wget http://www.kvaser.com/software/7330130980754/V5_18_0/linuxcan.tar.gz
@@ -50,11 +49,16 @@ source /opt/ros/kinetic/setup.bash
 
 ## sudo apt-get install libqwt5-qt4
 
+## install virtualenv for python3
+sudo apt-get install -y python3-pip
+sudo pip3 install virtualenv virtualenvwrapper
+
+mkvirtualenv virtual_babe -p python3
+
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
-
 
 cat ~/.ssh/id_rsa.pub
 echo "Set your github account than press enter to reboot your PC"
