@@ -3,7 +3,22 @@ cd $ROS_SONIA_WS
 git checkout develop
 $ROS_SONIA_WS/git_update.sh
 sudo ldconfig
+
+## setup ros
 sudo rosdep init
 rosdep update
+
+## apply patch
+cd ~
+mkdir patch
+cd patch
+tar -xvf ~/patch.tar.gz
+sudo patch /usr/include/mlpack/methods/kmeans/kmeans_impl.hpp kmeans.patch
+sudo patch /opt/ros/kinetic/include/opencv-3.3.1/opencv2/core/traits.hpp traits.patch
+cd ..
+rm -rf patch
+cd $ROS_SONIA_WS
+
+## compile
 catkin_make -j8
 source devel/setup.bash
