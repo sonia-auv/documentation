@@ -26,5 +26,6 @@ alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
 alias sonia-build='catkin_make -DCMAKE_BUILD_TYPE=Release -j8'
+alias comp='catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"'
 
 alias telemetry='rqt --perspective-file ${ROS_SONIA_WS}/src/rqt_sonia_plugins/SONIA.perspective'
