@@ -1,22 +1,15 @@
+## add repository key
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
+## update and install dependencies
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-
-sudo apt install -y make cmake git tig tree vim
-
-cd /opt
-sudo wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
-sudo tar zxvf DALSA.tar.gz
-cd DALSA
-## rm two software to install
-sudo apt install -y gcc make libglade2-dev libxext-dev ethtool
-./corinstall
+sudo apt install -y make cmake git tig tree vim ros-kinetic-desktop-full python-catkin-tools lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python3-pip python-pip --fix-missing
 
 ## install virtualenv for python3
-sudo apt-get install -y python3-pip python-pip
 sudo pip install virtualenv virtualenvwrapper
 
+## install the bash script
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
 echo "  . ~/.bash_sonia" >> ~/.bashrc
 echo "fi" >> ~/.bashrc
@@ -25,17 +18,7 @@ wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_alias
 wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
 
 source ~/.bashrc
-
-sudo apt-get install -y ros-kinetic-desktop-full python-catkin-tools clang-format-3.8 lm-sensors --fix-missing
-sudo apt-get install -y libqwt-dev libdc1394-22-dev
-
-## Adding librairies
-sudo apt-get install -y libmlpack-dev
-sudo apt-get install -y libarmadillo-dev
-
 source /opt/ros/kinetic/setup.bash
-
-## sudo apt-get install libqwt5-qt4
 
 ## create a virtualenv for python3
 export WORKON_HOME=~/.virtualenvs
@@ -45,6 +28,13 @@ mkvirtualenv virtual_babe -p python3
 ## install ros for python3
 workon virtual_babe
 sudo pip3 install -U rosinstall
+
+## install DALSA
+cd /opt
+sudo wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
+sudo tar zxvf DALSA.tar.gz
+cd DALSA
+./corinstall
 
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
