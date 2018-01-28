@@ -53,6 +53,16 @@ function comp_reset () {
     cd -
 }
 
+function swap_babe () {
+    if [ ${ROS_MASTER_URI} == 'http://localhost:11311/' ]
+    then
+        export ROS_MASTER_URI=http://192.168.0.11:11311/
+    elif [ ${ROS_MASTER_URI} == 'http://192.168.0.11:11311/' ]
+    then
+        export ROS_MASTER_URI=http://localhost:11311/
+    fi
+}
+
 function update-sonia-script () {
     wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
     source ~/.bash_sonia
