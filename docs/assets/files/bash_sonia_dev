@@ -34,14 +34,14 @@ alias dry_test='rqt --perspective-file ${ROS_SONIA_WS}/perspective/dry_test.pers
 alias pool='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Test_piscine.perspective'
 
 ## useful function
-comp () {
+function comp () {
     deactivate
     cd ${ROS_SONIA_WS}
     catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
     workon virtual_babe
 }
 
-update-sonia-script () {
+function update-sonia-script () {
     wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
     source ~/.bash_sonia
 }
