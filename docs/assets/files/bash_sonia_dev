@@ -39,6 +39,7 @@ function comp () {
     cd ${ROS_SONIA_WS}
     catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
     workon virtual_babe
+    cd -
 }
 
 function update-sonia-script () {
