@@ -41,3 +41,9 @@ cd ${ROS_SONIA_WS}
 catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
 workon virtual_babe
 }
+
+update-sonia-script()
+{
+wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
+source ~/.bash_sonia
+}
