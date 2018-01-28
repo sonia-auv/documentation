@@ -20,6 +20,8 @@ if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
 
+workon virtual_babe
+
 ## Useful aliases
 alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
 alias babe='ssh -X sonia@192.168.0.11'
