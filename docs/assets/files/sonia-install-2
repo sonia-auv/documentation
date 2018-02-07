@@ -21,6 +21,6 @@ rm -rf patch
 cd $ROS_SONIA_WS
 
 ## compile
-source ~/.bash_sonia
+source ~/.bash_alias
 comp
 source devel/setup.bash
