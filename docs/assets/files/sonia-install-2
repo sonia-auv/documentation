@@ -21,7 +21,5 @@ rm -rf patch
 cd $ROS_SONIA_WS
 
 ## compile
-deactivate
 catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
-workon virtual_babe
 source devel/setup.bash
