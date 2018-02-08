@@ -334,9 +334,9 @@ Installing software is really simple, just execute the following command and enj
 	wget http://sonia-auv.readthedocs.org/assets/files/sonia-install-1 -O ~/sonia-install-1
 	wget http://sonia-auv.readthedocs.org/assets/files/sonia-install-2 -O ~/sonia-install-2
 	sudo chmod +x sonia-install-1 sonia-install-2
-	sh sonia-install-1
+	./sonia-install-1
 	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
-	sh sonia-install-2
+	./sonia-install-2
 	# Then remove the two files
 	rm sonia-install-1 sonia-install-2
 
