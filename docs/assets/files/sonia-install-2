@@ -22,7 +22,6 @@ fi
 
 
 # ask for the sonia version
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 workon virtual_babe
