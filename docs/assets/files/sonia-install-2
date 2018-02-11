@@ -22,9 +22,6 @@ fi
 
 
 # ask for the sonia version
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-workon virtual_babe
 echo "Quelle version du script vous voulez installer?"
 select ask in "Devel" "Prod" "Annuler"; do
     case $ask in
@@ -37,7 +34,9 @@ select ask in "Devel" "Prod" "Annuler"; do
         Annuler ) break;;
     esac
 done
-deactivate
+
+# install rospy for the virtualenvs
+sudo pip3 install -U rosinstall catkin_pkg
 
 cd ..
 rm -rf patch

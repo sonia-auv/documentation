@@ -4,7 +4,7 @@ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C
 
 ## update and install dependencies
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full python-catkin-tools lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python3-pip python-pip
+sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python3-pip
 
 ## install DALSA
 cd /opt
@@ -14,7 +14,7 @@ cd DALSA
 ./corinstall
 
 ## install virtualenv for python3
-sudo pip install virtualenv virtualenvwrapper
+sudo pip3 install virtualenv virtualenvwrapper
 
 ## install the bash script
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
@@ -31,10 +31,6 @@ source /opt/ros/kinetic/setup.bash
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv virtual_babe -p python3
-
-## install ros for python3
-workon virtual_babe
-sudo pip3 install -U rosinstall
 
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
