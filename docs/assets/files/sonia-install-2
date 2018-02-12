@@ -4,10 +4,6 @@ git checkout develop
 $ROS_SONIA_WS/git_update.sh
 sudo ldconfig
 
-## setup ros
-sudo rosdep init
-rosdep update
-
 ## apply patch
 cd ~
 mkdir patch
@@ -41,6 +37,10 @@ pip3 install -U rosdep rosinstall_generator wstool rosinstall catkin_tools empy
 cd ..
 rm -rf patch
 cd $ROS_SONIA_WS
+
+## setup ros
+sudo rosdep init
+rosdep update
 
 ## compile
 catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
