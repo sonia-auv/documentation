@@ -36,7 +36,7 @@ select ask in "Devel" "Prod" "Annuler"; do
 done
 
 # install rospy for the virtualenvs
-pip3 install -U rosinstall catkin_tools
+pip3 install -U rosdep rosinstall_generator wstool rosinstall catkin_tools empy
 
 cd ..
 rm -rf patch
