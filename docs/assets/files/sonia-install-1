@@ -4,7 +4,7 @@ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C
 
 ## update and install dependencies
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python2-pip
+sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python-pip
 
 ## install DALSA
 cd /opt
