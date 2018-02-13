@@ -4,7 +4,7 @@ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C
 
 ## update and install dependencies
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python3-pip
+sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python2-pip
 
 ## install DALSA
 cd /opt
@@ -14,7 +14,7 @@ cd DALSA
 ./corinstall
 
 ## install virtualenv for python3
-sudo pip3 install virtualenv virtualenvwrapper
+sudo pip2 install virtualenv virtualenvwrapper
 
 ## install the bash script
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
@@ -27,10 +27,10 @@ wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_son
 source ~/.bashrc
 source /opt/ros/kinetic/setup.bash
 
-## create a virtualenv for python3
+## create a virtualenv for python2
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
-mkvirtualenv virtual_babe -p python3
+mkvirtualenv virtual_babe -p python2
 
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
