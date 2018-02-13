@@ -336,10 +336,7 @@ Installing software is really simple, just execute the following command and enj
 	sudo chmod +x sonia-install-1 sonia-install-2
 	./sonia-install-1
 	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
-	
-	deactivate
 	./sonia-install-2
-	workon virtual_babe
 	
 	# Then remove the two files
 	rm sonia-install-1 sonia-install-2
