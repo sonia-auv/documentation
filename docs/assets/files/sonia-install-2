@@ -22,17 +22,17 @@ echo "Quelle version du script vous voulez installer?"
 select ask in "Devel" "Prod" "Annuler"; do
     case $ask in
         Devel ) sudo patch ~/.bash_sonia devel.patch
-                pip3 install $ROS_SONIA_WS/requirements/develop.txt
+                pip2 install $ROS_SONIA_WS/requirements/develop.txt
                 break;;
         Prod )  sudo patch ~/.bash_sonia prod.patch
-                pip3 install $ROS_SONIA_WS/requirements/prod.txt
+                pip2 install $ROS_SONIA_WS/requirements/prod.txt
                 break;;
         Annuler ) break;;
     esac
 done
 
 # install rospy for the virtualenvs
-pip3 install -U rosdep rosinstall_generator wstool rosinstall catkin_tools empy
+pip2 install -U rosdep rosinstall_generator wstool rosinstall catkin_tools empy
 
 cd ..
 rm -rf patch
