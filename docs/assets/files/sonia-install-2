@@ -33,7 +33,7 @@ done
 
 ## install ros for the virtualenvs
 sudo wget http://sonia-auv.readthedocs.org/assets/files/ros_requirements.txt
-sudo pip2 uninstall -r ros_requirements.txt
+sudo pip2 install -r ros_requirements.txt
 rm ros_requirements.txt
 
 cd ..
