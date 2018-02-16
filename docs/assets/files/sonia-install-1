@@ -16,6 +16,17 @@ cd DALSA
 ## install virtualenv for python3
 sudo pip2 install virtualenv virtualenvwrapper
 
+echo "Souhaitez-vous isoler les package python de ros dans le virtualenv?"
+select ask in "Oui" "Non"; do
+    case $ask in
+        Oui ) sudo wget http://sonia-auv.readthedocs.org/assets/files/ros_requirements.txt
+                sudo pip2 uninstall -r ros_requirements.txt
+                rm ros_requirements.txt
+                break;;
+        Non ) break;;
+    esac
+done
+
 ## install the bash script
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
 echo "  . ~/.bash_sonia" >> ~/.bashrc

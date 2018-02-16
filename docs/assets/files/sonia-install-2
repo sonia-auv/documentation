@@ -17,7 +17,7 @@ if [ ! -f ~/.config/pip/pip.conf ]; then
 fi
 
 
-# ask for the sonia version
+## ask for the sonia version
 echo "Quelle version du script vous voulez installer?"
 select ask in "Devel" "Prod" "Annuler"; do
     case $ask in
@@ -31,8 +31,10 @@ select ask in "Devel" "Prod" "Annuler"; do
     esac
 done
 
-# install rospy for the virtualenvs
-pip2 install -U rosdep rosinstall_generator wstool rosinstall catkin_tools empy numpy yaml
+## install ros for the virtualenvs
+sudo wget http://sonia-auv.readthedocs.org/assets/files/ros_requirements.txt
+sudo pip2 uninstall -r ros_requirements.txt
+rm ros_requirements.txt
 
 cd ..
 rm -rf patch
