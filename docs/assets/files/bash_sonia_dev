@@ -1,11 +1,13 @@
 # SONIA Configuration
 
 ## Environment variables
+IP_ADDRESS=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
 export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
 export ROS_SONIA_WS=~/Workspaces/ros_sonia_ws/
 export ROS_MASTER_URI=http://localhost:11311/
 # export ROS_MASTER_URI=http://192.168.0.11:11311/
 export ROS_HOME=$ROS_SONIA_WS
+export ROS_IP=${IP_ADDRESS}
 export LC_ALL="en_US.UTF-8"
 export EDITOR="vim"
 export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
@@ -37,19 +39,15 @@ alias pool='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Test_piscine.pers
 
 ## useful function
 function comp () {
-    deactivate
     cd ${ROS_SONIA_WS}
     catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
-    workon virtual_babe
     cd -
 }
 
 function comp_reset () {
-    deactivate
     cd ${ROS_SONIA_WS}
     rm -rf devel/ build/
     catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
-    workon virtual_babe
     cd -
 }
 
