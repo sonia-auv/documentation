@@ -33,7 +33,7 @@ source /opt/ros/kinetic/setup.bash
 ## create a virtualenv for python2
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
-mkvirtualenv virtual_babe -p python2
+mkvirtualenv virtual_babe --system-site-packages -p python2
 
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
