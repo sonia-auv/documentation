@@ -31,11 +31,6 @@ select ask in "Devel" "Prod" "Annuler"; do
     esac
 done
 
-## install ros for the virtualenvs
-wget http://sonia-auv.readthedocs.org/assets/files/ros_requirements.txt
-cat ros_requirements.txt | xargs -n 1 pip2 install
-rm ros_requirements.txt
-
 cd ..
 rm -rf patch
 cd $ROS_SONIA_WS
