@@ -1,0 +1,77 @@
+# SONIA Configuration
+
+# ------------------------------------------------------------------------------------------------
+## Environment variables
+export IP_ADDRESS=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
+export LC_ALL="en_US.UTF-8"
+export EDITOR="vim"
+
+# ROS Environement variables
+export ROS_SONIA_WS=~/Workspaces/ros_sonia_ws/
+export ROS_MASTER_URI=http://192.168.0.11:11311/
+export ROS_HOME=$ROS_SONIA_WS
+export ROS_IP=${IP_ADDRESS}
+export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
+
+# SONIA Environement variables
+export SONIA_ENVIRONMENT=jetson
+export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
+
+## Virutalen environment variables
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+# ------------------------------------------------------------------------------------------------
+# Jetson TX2 SONIA Aliases
+
+alias babe?='ping 192.168.0.11'
+alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
+alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
+alias deep_detector='cd ${ROS_SONIA_WS}/src/deep_detector'
+
+
+alias powerup='echo ***REMOVED*** | sudo -S ~/jetson_clock.sh'
+alias poof='echo ***REMOVED*** | sudo -S poweroff'
+alias repoof='echo ***REMOVED*** | sudo -S reboot'
+
+# ------------------------------------------------------------------------------------------------
+# SONIA Custom fucntion
+## useful function
+function comp () {
+    cd ${ROS_SONIA_WS}
+    catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
+    cd -
+}
+
+function comp_reset () {
+    cd ${ROS_SONIA_WS}
+    rm -rf devel/ build/
+    catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
+    cd -
+}
+
+function update-sonia-script () {
+    wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_jetson -O ~/.bash_sonia
+    source ~/.bash_sonia
+}
+
+
+# ------------------------------------------------------------------------------------------------
+# Execute on load
+
+## ROS specific configurations
+source /opt/ros/kinetic/setup.bash
+if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
+    source $ROS_SONIA_WS/devel/setup.bash
+fi
+
+workon virtual_babe
+powerup
+
+
+
+
+
+
+
+

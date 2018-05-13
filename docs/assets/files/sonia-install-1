@@ -25,7 +25,7 @@ echo "  . ~/.bash_sonia" >> ~/.bashrc
 echo "fi" >> ~/.bashrc
 
 wget http://sonia-auv.readthedocs.org/assets/files/bash_aliases -O ~/.bash_aliases
-wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ~/.bash_sonia
+wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
 
 source ~/.bashrc
 source /opt/ros/kinetic/setup.bash
