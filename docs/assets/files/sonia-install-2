@@ -19,7 +19,7 @@ fi
 
 ## ask for the sonia version
 echo "Quelle version du script vous voulez installer?"
-select ask in "Devel" "Prod" "Annuler"; do
+select ask in "Devel" "Prod" "Jetson" "Annuler"; do
     case $ask in
         Devel ) wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_dev -O ./.bash_sonia
                 pip2 install -r $ROS_SONIA_WS/requirements/develop.txt
@@ -29,6 +29,7 @@ select ask in "Devel" "Prod" "Annuler"; do
                 break;;
 	Jetson) wget http://sonia-auv.readthedocs.org/assets/files/jetson_consumption.sh -O ./jetson_consumption.sh
 		wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_jetson -O ./.bash_sonia
+		break;;
         Annuler ) break;;
     esac
 done
