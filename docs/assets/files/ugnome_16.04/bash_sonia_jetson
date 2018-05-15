@@ -51,7 +51,7 @@ function comp_reset () {
 }
 
 function update-sonia-script () {
-    wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia_jetson -O ~/.bash_sonia
+    wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_sonia_jetson -O ~/.bash_sonia
     source ~/.bash_sonia
 }
 

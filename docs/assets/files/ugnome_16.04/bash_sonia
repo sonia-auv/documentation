@@ -62,6 +62,6 @@ function swap_babe () {
 }
 
 function update-sonia-script () {
-    wget http://sonia-auv.readthedocs.org/assets/files/bash_sonia -O ~/.bash_sonia
+    wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_sonia -O ~/.bash_sonia
     source ~/.bash_sonia
 }
