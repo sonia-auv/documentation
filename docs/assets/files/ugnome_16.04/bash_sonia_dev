@@ -29,6 +29,7 @@ workon virtual_babe
 alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
 alias babe='ssh -X sonia@192.168.0.11'
 alias babe?='ping 192.168.0.11'
+alias switch?='ping 192.168.0.12'
 alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
