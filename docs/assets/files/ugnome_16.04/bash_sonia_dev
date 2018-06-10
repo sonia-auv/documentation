@@ -28,8 +28,10 @@ workon virtual_babe
 ## Useful aliases
 alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
 alias babe='ssh -X sonia@192.168.0.11'
+alias jetson='ssh -X nvidia@192.168.0.13'
 alias babe?='ping 192.168.0.11'
 alias switch?='ping 192.168.0.12'
+alias jetson?='ping 192.168.0.13'
 alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
@@ -44,6 +46,11 @@ function comp () {
     cd ${ROS_SONIA_WS}
     catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
     cd -
+}
+
+function full_poof () {
+    ssh sonia@192.168.0.11 "poof"
+    ssh nvidia@192.168.0.13 "poof"
 }
 
 function comp_reset () {
