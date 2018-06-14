@@ -17,10 +17,6 @@ export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 export SONIA_ENVIRONMENT=jetson
 export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
 
-## Virutalen environment variables
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 # ------------------------------------------------------------------------------------------------
 # Jetson TX2 SONIA Aliases
 
@@ -71,7 +67,6 @@ if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
 
-workon virtual_babe
 powerup
 
 
