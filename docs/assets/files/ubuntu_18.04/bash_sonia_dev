@@ -43,8 +43,8 @@ function comp () {
 }
 
 function full_poof () {
-    ssh sonia@192.168.0.11 "source /etc/profile; poof"
-    ssh nvidia@192.168.0.13 "source /etc/profile; poof"
+    ssh sonia@192.168.0.11 "sudo -S poweroff"
+    ssh nvidia@192.168.0.13 "sudo -S poweroff"
 }
 
 function comp_reset () {

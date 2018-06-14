@@ -26,9 +26,9 @@ alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 alias deep_detector='cd ${ROS_SONIA_WS}/src/deep_detector'
 
 alias consumption='~/jetson_consumption.sh'
-alias powerup='echo ***REMOVED*** | sudo -S ~/jetson_clock.sh'
-alias poof='echo ***REMOVED*** | sudo -S poweroff'
-alias repoof='echo ***REMOVED*** | sudo -S reboot'
+alias powerup='sudo -S ~/jetson_clock.sh'
+alias poof='sudo -S poweroff'
+alias repoof='sudo -S reboot'
 
 # ------------------------------------------------------------------------------------------------
 # SONIA Custom fucntion
