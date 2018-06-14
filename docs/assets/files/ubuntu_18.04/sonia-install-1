@@ -13,16 +13,13 @@ sudo tar zxvf DALSA.tar.gz
 cd DALSA
 ./corinstall
 
-## update pip2
-sudo -H pip2 install --upgrade pip
-
 ## install the bash script
 echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
 echo "  . ~/.bash_sonia" >> ~/.bashrc
 echo "fi" >> ~/.bashrc
 
-wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_aliases -O ~/.bash_aliases
-wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_sonia -O ~/.bash_sonia
+wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_aliases -O ~/.bash_aliases
+wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_sonia -O ~/.bash_sonia
 
 source ~/.bashrc
 source /opt/ros/kinetic/setup.bash

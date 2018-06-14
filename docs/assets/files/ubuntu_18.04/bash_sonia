@@ -56,6 +56,12 @@ function swap_babe () {
 }
 
 function update-sonia-script () {
-    wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_sonia -O ~/.bash_sonia
-    source ~/.bash_sonia
+    ping -c1 readthedocs.org 2>/dev/null 1>/dev/null
+    if [ "$?" = 0 ]
+    then
+        wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_sonia -O ~/.bash_sonia
+        source ~/.bash_sonia
+    else
+        echo "Host not found"
+    fi
 }
