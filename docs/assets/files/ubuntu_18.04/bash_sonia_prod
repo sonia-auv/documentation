@@ -13,22 +13,14 @@ export EDITOR="vim"
 export SONIA_ENVIRONMENT=devel
 export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 
-## virtualenv environment variables
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 ## ROS specific configurations
 source /opt/ros/kinetic/setup.bash
 if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
 
-workon virtual_babe
-
 ## Useful aliases
-alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
-alias babe='ssh -X sonia@192.168.0.11'
-alias babe?='ping 192.168.0.11'
+alias sa='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
 alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
