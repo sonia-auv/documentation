@@ -2,7 +2,7 @@
 sudo apt update && sudo apt install curl
 curl http://repo.ros2.org/repos.key | sudo apt-key add -
 
-sudo sh -c 'echo "deb arch=amd64 http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
+sudo sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
 
 export ROS_DISTRO=bouncy
 
