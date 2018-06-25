@@ -14,7 +14,7 @@ export SONIA_ENVIRONMENT=devel
 export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 
 ## ROS specific configurations
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/bouncy/setup.bash
 if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
