@@ -38,7 +38,10 @@ source ~/.bashrc
 source /opt/ros/bouncy/setup.bash
 
 ## ADD ssh key on github before pulling git
-ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+echo "Please enter the email for your ssh key"
+read email
+
+ssh-keygen -t rsa -b 4096 -C $email
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
