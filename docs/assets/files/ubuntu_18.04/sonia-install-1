@@ -8,10 +8,16 @@ export ROS_DISTRO=bouncy
 
 ## update and install dependencies
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
-sudo apt install -y -f make cmake git tig tree vim ros-kinetic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python-pip
+sudo apt install -y -f make cmake git tig tree vim lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python-pip
 
 ## install all ros2 package except turtlebot or ros1-bridge
-sudo apt install `apt list "ros-$ROS_DISTRO-*" 2> /dev/null | grep "/" | awk -F/ '{print $1}' | grep -v -e ros-$ROS_DISTRO-ros1-bridge -e ros-$ROS_DISTRO-turtlebot2- | tr "\n" " "`
+sudo apt install `apt list "ros-$ROS_DISTRO-*" 2> /dev/null | \
+  grep '/' | awk -F/ '{print $1}' | \
+  grep -v -e ros-$ROS_DISTRO-ros1-bridge \
+  -e ros-$ROS_DISTRO-turtlebot2- \
+  -e "ros-$ROS_DISTRO.*-dbgsym" \
+  -e "ros-$ROS_DISTRO-.*opensplice" \
+  -e "ros-$ROS_DISTRO-.*connext" | tr '\n' ' '`
 
 ## install DALSA
 cd /opt
@@ -29,7 +35,7 @@ wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_aliases -O 
 wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_sonia -O ~/.bash_sonia
 
 source ~/.bashrc
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/bouncy/setup.bash
 
 ## ADD ssh key on github before pulling git
 ssh-keygen -t rsa -b 4096 -C "you@email.ext"
