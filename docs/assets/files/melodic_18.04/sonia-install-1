@@ -1,0 +1,38 @@
+## add repository key
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+## update and install dependencies
+sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
+sudo apt install -y -f make cmake git tig tree vim ros-melodic-desktop-full lm-sensors gcc make libglade2-dev libxext-dev ethtool libqwt-dev libdc1394-22-dev libarmadillo-dev libmlpack-dev python-pip
+
+## install DALSA
+cd /opt
+sudo wget http://sonia-auv.readthedocs.org/assets/files/DALSA.tar.gz
+sudo tar zxvf DALSA.tar.gz
+cd DALSA
+./corinstall
+
+## update pip2
+sudo -H pip2 install --upgrade pip
+
+## install the bash script
+echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
+echo "  . ~/.bash_sonia" >> ~/.bashrc
+echo "fi" >> ~/.bashrc
+
+wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/bash_aliases -O ~/.bash_aliases
+wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/bash_sonia -O ~/.bash_sonia
+
+source ~/.bashrc
+source /opt/ros/melodic/setup.bash
+
+## ADD ssh key on github before pulling git
+ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+cat ~/.ssh/id_rsa.pub
+echo "Set your github account than press enter to reboot your PC"
+read test
+reboot
