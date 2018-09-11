@@ -331,8 +331,8 @@ Then resource your `.bashrc`:
 Installing software is really simple, just execute the following command and enjoy the show (Be aware that at some point you might need to do some actions[ i.e press ENTER]):
 
 	cd ~
-	wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/sonia-install-1 -O ~/sonia-install-1
-	wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/sonia-install-2 -O ~/sonia-install-2
+	wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/sonia-install-1 -O ~/sonia-install-1
+	wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/sonia-install-2 -O ~/sonia-install-2
 	sudo chmod +x sonia-install-1 sonia-install-2
 	./sonia-install-1
 	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
