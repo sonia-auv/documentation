@@ -79,6 +79,13 @@ RS485 use 4 different threads and two thread-safe queue (writerQueue and parseQu
 	uint8 slave
 	uint8 cmd
 	uint8[] data
+	
+## RS485 structure
+
+![AUV7 Design](../assets/img/RS485.png)
+
+the cmd and the slave value can be found in the ros message definition.
+
 ## useful documentation
 
 [serial programming in posix](https://www.cmrr.umn.edu/~strupp/serial.html)
