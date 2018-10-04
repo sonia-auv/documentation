@@ -29,7 +29,7 @@ This documentation is organized into a couple section:
 ## Software Documentation <a name="software"></a>
 
 - [Overview](software/overview.md)
-- [interface_RS485](software/interface_RS485.md)
+- [Interface RS485](software/interface_RS485.md)
 - [Provider DVL](software/provider_dvl.md)
 - [Provider IMU](software/provider_imu.md)
 - [Provider Sonar](software/provider_sonar.md)
