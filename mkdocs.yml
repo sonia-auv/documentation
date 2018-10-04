@@ -6,6 +6,7 @@ pages:
     - C++ Style Guide: 'user/c++_style_guide.md'
   - Software Documentation:
     - Overview: 'software/overview.md'
+    - interface_RS485: 'software/interface_RS485.md'
     - Provider DVL: 'software/provider_dvl.md'
     - Provider IMU: 'software/provider_imu.md'
     - Provider Sonar: 'software/provider_sonar.md'
