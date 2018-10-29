@@ -4,6 +4,7 @@
 ## command list
 
 - `sa` - start all the ros service on the auv.
+- `sv` - start the vision system (only on the babe)
 - `sas` - start all the proc, but the providers are simulated.
 - `babe` - remote connect to the auv.
 - `jetson` - remote connect to the jetson.
@@ -21,3 +22,11 @@
 - `swap_babe` - swap the current target (local -> babe OR babe-->local).
 - `update-sonia-script` - update the current `.bash_sonia` file.
 - `full_poof` - shutdown the babe and the jetson.
+
+## Dry_test
+
+1. connect to the babe with the `babe` command
+2. start the auv system with the `sa` command
+3. start the vision with the `sv` command
+4. start the telemetry for a dry_test with the `dry_test` command
+5. execute the dry_test
