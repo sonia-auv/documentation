@@ -25,6 +25,7 @@ This documentation is organized into a couple section:
 - [Getting Started](user/getting_started.md)
 - [Installation](user/installation.md)
 - [C++ Style Guide](user/c++_style_guide.md)
+- [Environment](user/environment.md)
 
 ## Software Documentation <a name="software"></a>
 
