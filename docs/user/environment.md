@@ -3,10 +3,10 @@
 
 ## command list
 
-- `sa` - start all the ros service on the auv.
+- `sa` - start all the ros service on the auv(only on the babe).
 - `sv` - start the vision system (only on the babe).
 - `sas` - start all the proc, but the providers are simulated.
-- `sj` - start the system on the jetson.
+- `sj` - start the system on the jetson(only on the jetson).
 - `babe` - remote connect to the auv.
 - `jetson` - remote connect to the jetson.
 - `babe?` - ping the babe.
