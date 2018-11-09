@@ -4,8 +4,9 @@
 ## command list
 
 - `sa` - start all the ros service on the auv.
-- `sv` - start the vision system (only on the babe)
+- `sv` - start the vision system (only on the babe).
 - `sas` - start all the proc, but the providers are simulated.
+- `sj` - start the system on the jetson.
 - `babe` - remote connect to the auv.
 - `jetson` - remote connect to the jetson.
 - `babe?` - ping the babe.
@@ -25,8 +26,22 @@
 
 ## Dry_test
 
-1. connect to the babe with the `babe` command
-2. start the auv system with the `sa` command
-3. start the vision with the `sv` command
-4. start the telemetry for a dry_test with the `dry_test` command
-5. execute the dry_test
+1. connect to the babe with the `babe` command.
+2. start the auv system with the `sa` command.
+3. open a new terminal and connect to the babe.
+4. start the vision with the `sv` command.
+5. open a new terminal and change the current target with `swap_babe` command.
+6. start the telemetry for a dry_test with the `dry_test` command.
+7. execute the dry_test.
+
+## test on the jetson
+
+1. connect to the babe with the `babe` command.
+2. start the auv system with the `sa` command.
+3. open a new terminal and connect to the babe.
+4. start the vision with the `sv` command.
+5. open a new terminal and connect to the jetson with the `jetson` command.
+6. start the system on the jetson with the `sj` command.
+7. open a new terminal and change the current target with `swap_babe` command.
+6. start the telemetry for the test with the `pool` command.
+7. execute the test.
