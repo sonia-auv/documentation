@@ -68,3 +68,10 @@ Your browser does not support the video tag.
  <source src="../../assets/video/mission_planner.webm" type="video/webm">
  Your browser does not support the video tag.
 </video> 
+
+## test while simulating the environment
+
+1. start the simulated auv system with `sas`
+2. open a new terminal
+3. start the telemetry for the test with the `pool` command.
+4. execute the test.
