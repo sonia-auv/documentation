@@ -51,3 +51,20 @@ Your browser does not support the video tag.
 7. open a new terminal and change the current target with `swap_babe` command.
 6. start the telemetry for the test with the `pool` command.
 7. execute the test.
+
+## pool test environment
+
+1. connect to the babe with the `babe` command.
+2. start the auv system with the `sa` command.
+3. open a new terminal and connect to the babe.
+4. start the vision with the `sv` command.
+5. open a new terminal and change the current target with `swap_babe` command.
+6. start the telemetry for the test with the `pool` command.
+7. execute the test.
+
+### mission planing interface
+
+ <video width="100%" height="350" controls>
+ <source src="../../assets/video/mission_planner.webm" type="video/webm">
+ Your browser does not support the video tag.
+</video> 
