@@ -34,10 +34,9 @@
 6. start the telemetry for a dry_test with the `dry_test` command.
 7. execute the dry_test.
 
-.. raw:: html
-
  <video width="320" height="240" controls>
  <source src="../assets/video/dry_test.mp4" type="video/mp4">
+ <source src="../assets/video/dry_test.webm" type="video/webm">
 Your browser does not support the video tag.
 </video> 
 
