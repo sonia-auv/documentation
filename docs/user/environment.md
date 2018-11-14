@@ -35,8 +35,8 @@
 7. execute the dry_test.
 
  <video width="320" height="240" controls>
- <source src="../assets/video/dry_test.mp4" type="video/mp4">
- <source src="../assets/video/dry_test.webm" type="video/webm">
+ <source src="../../assets/video/dry_test.mp4" type="video/mp4">
+ <source src="../../assets/video/dry_test.webm" type="video/webm">
 Your browser does not support the video tag.
 </video> 
 
