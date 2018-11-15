@@ -17,6 +17,7 @@ This documentation is organized into a couple section:
 - [Software Documentation](#software)
 - [Electrical Documentation](#electrical)
 - [Mechanical Documentation](#mechanical)
+- [Proof of Concept (French only)](#POC)
 - [About S.O.N.I.A.](#about)
 
 
@@ -49,6 +50,10 @@ This documentation is organized into a couple section:
 ## Mechanical Documentation <a name="mechanical"></a>
 
 - [Overview](mechanical/overview.md)
+
+## Proof of Concept <a name="POC"></a>
+
+- [2018-2019](POC/2018_2019.md)
 
 ## About S.O.N.I.A. <a name="about"></a>
 

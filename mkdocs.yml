@@ -21,6 +21,8 @@ pages:
     - DVL: 'electrical/dvl.md'
   - Mechanical Documentation:
     - Overview: 'mechanical/overview.md'
+  - Proof of Concept:
+    - 2018-2019: 'POC/2018_2019.md'
   - About S.O.N.I.A.:
     - The Project: 'about/project.md'
     - Open Source Philosophy: 'about/open_source.md'
