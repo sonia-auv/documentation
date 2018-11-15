@@ -1,7 +1,7 @@
  
 # Environment
 
-## command list
+## Command list
 
 - `sa` - start all the ros service on the auv(only on the babe).
 - `sv` - start the vision system (only on the babe).
@@ -40,7 +40,7 @@
 Your browser does not support the video tag.
 </video> 
 
-## test on the jetson
+## Test on the jetson
 
 1. connect to the babe with the `babe` command.
 2. start the auv system with the `sa` command.
@@ -52,7 +52,7 @@ Your browser does not support the video tag.
 6. start the telemetry for the test with the `pool` command.
 7. execute the test.
 
-## pool test environment
+## Pool test environment
 
 1. connect to the babe with the `babe` command.
 2. start the auv system with the `sa` command.
@@ -62,16 +62,37 @@ Your browser does not support the video tag.
 6. start the telemetry for the test with the `pool` command.
 7. execute the test.
 
-### mission planing interface
+### Mission planing interface
 
  <video width="100%" height="350" controls>
  <source src="../../assets/video/mission_planner.webm" type="video/webm">
  Your browser does not support the video tag.
 </video> 
 
-## test while simulating the environment
+## Test while simulating the environment
 
 1. start the simulated auv system with `sas`
 2. open a new terminal
 3. start the telemetry for the test with the `pool` command.
 4. execute the test.
+
+## Git tutorial
+
+the team use git to work with github: 
+- A good git tutorial can be found on this site, it's free but you need an account: https://www.codecademy.com/learn/learn-git
+- A list of all the command can also be found on the official reference manual: https://git-scm.com/docs
+
+## linux tutorial
+
+the team use linux for their developpement environment. A good knowledge of linux is necessary:
+- A good tutorial about the command line can be found on this site, it's free but you need an account: https://www.codecademy.com/learn/learn-the-command-line
+
+## C++ tutorial
+
+the team use C++ for all their low level development:
+- A good tutorial about C++ can be found here, only part 1 and 2 is necessary: https://openclassrooms.com/en/courses/1894236-programmez-avec-le-langage-c
+
+## python2 tutorial
+
+the team use python2 for all their high level development:
+- A good python tutorial can be found on the official site: https://docs.python.org/2.7/tutorial/
