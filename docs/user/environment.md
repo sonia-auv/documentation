@@ -83,7 +83,7 @@ the team use git to work with github:
 - A good git tutorial can be found on [this site](https://www.codecademy.com/learn/learn-git), it's free but you need an account.
 - A list of all the command can also be found on the official [reference manual](https://git-scm.com/docs).
 
-## linux tutorial
+## Linux tutorial
 
 the team use linux for their developpement environment. A good knowledge of linux is necessary:
 
@@ -95,8 +95,30 @@ the team use C++ for all their low level development:
 
 - A good tutorial about C++ can be found [here](https://openclassrooms.com/en/courses/1894236-programmez-avec-le-langage-c), only part 1 and 2 is necessary.
 
-## python2 tutorial
+## Python2 tutorial
 
 the team use python2 for all their high level development:
 
 - A good python tutorial can be found on the [official site](https://docs.python.org/2.7/tutorial/).
+
+## ROS tutorial
+
+the team use ROS inside the sub to allow process to communicate between them:
+
+- A good tutorial for the robot operating system can be found [here](http://wiki.ros.org/ROS/Tutorials)
+
+## IDE
+
+the S.O.N.I.A officially support jetbrains product, you can get them for free if you register with your ÉTS email at this [site](https://www.jetbrains.com/)
+
+the team use clion for c++:
+
+<div style="text-align: center; margin-bottom: 2em;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Srnw1dI1iAA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+the team use pycharm for python2:
+
+<div style="text-align: center; margin-bottom: 2em;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/BPC-bGdBSM8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
