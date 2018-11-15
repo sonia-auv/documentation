@@ -79,20 +79,20 @@ Your browser does not support the video tag.
 ## Git tutorial
 
 the team use git to work with github: 
-- A good git tutorial can be found on this site, it's free but you need an account: https://www.codecademy.com/learn/learn-git
-- A list of all the command can also be found on the official reference manual: https://git-scm.com/docs
+- A good git tutorial can be found on [this site](https://www.codecademy.com/learn/learn-git), it's free but you need an account.
+- A list of all the command can also be found on the official [reference manual](https://git-scm.com/docs).
 
 ## linux tutorial
 
 the team use linux for their developpement environment. A good knowledge of linux is necessary:
-- A good tutorial about the command line can be found on this site, it's free but you need an account: https://www.codecademy.com/learn/learn-the-command-line
+- A good tutorial about the command line can be found on [this site](https://www.codecademy.com/learn/learn-the-command-line), it's free but you need an account.
 
 ## C++ tutorial
 
 the team use C++ for all their low level development:
-- A good tutorial about C++ can be found here, only part 1 and 2 is necessary: https://openclassrooms.com/en/courses/1894236-programmez-avec-le-langage-c
+- A good tutorial about C++ can be found [here](https://openclassrooms.com/en/courses/1894236-programmez-avec-le-langage-c), only part 1 and 2 is necessary.
 
 ## python2 tutorial
 
 the team use python2 for all their high level development:
-- A good python tutorial can be found on the official site: https://docs.python.org/2.7/tutorial/
+- A good python tutorial can be found on the [official site](https://docs.python.org/2.7/tutorial/).
