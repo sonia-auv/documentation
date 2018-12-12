@@ -5,6 +5,10 @@ pages:
     - Installation: 'user/installation.md'
     - C++ Style Guide: 'user/c++_style_guide.md'
     - Environment: 'user/environment.md'
+  - Server Documentation:
+    - Getting started: 'server/getting_started.md'
+    - Installation: 'server/installation.md'
+    - Orchestration: 'server/orchestration.md'
   - Software Documentation:
     - Overview: 'software/overview.md'
     - Interface RS485: 'software/interface_RS485.md'
