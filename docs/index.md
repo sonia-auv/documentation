@@ -28,6 +28,12 @@ This documentation is organized into a couple section:
 - [C++ Style Guide](user/c++_style_guide.md)
 - [Environment](user/environment.md)
 
+## Server Documentation <a name="server"></a>
+
+- [Getting started](server/getting_started.md)
+- [Installation](server/installation.md)
+- [Orchestration](server/orchestration.md)
+
 ## Software Documentation <a name="software"></a>
 
 - [Overview](software/overview.md)
