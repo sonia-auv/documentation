@@ -7,6 +7,12 @@ CYAN="$(tput setaf 6)"
 BOLD="$(tput bold)"
 RESET="$(tput sgr0)"
 
+REMOTE_ROS_VERSION_FOLDER="melodic_18_04_new"
+REMOTE_AGX_FOLDER=${REMOTE_ROS_VERSION_FOLDER}/agx
+REMOTE_TX2_FOLDER=${REMOTE_ROS_VERSION_FOLDER}/tx2
+REMOTE_PC_FOLDER=${REMOTE_ROS_VERSION_FOLDER}/pc
+REMOTE_DEV_FOLDER=${REMOTE_ROS_VERSION_FOLDER}/dev
+
 # Utility functions
 ########################################################################################################
 
