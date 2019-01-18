@@ -70,11 +70,77 @@ function usage() {
 
 
 function install_dev_environment() {
-    echo "DEV: TO BE IMPLEMENTED"
+    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+    sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+    
+    sudo apt update -y && sudo apt dist-upgrade -y
+    sudo apt install -y -f \
+        make \
+        gcc \
+        cmake \
+        git \
+        vim \
+        ros-melodic-desktop-full  \
+        libqwt-dev \
+        libarmadillo-dev \
+        libmlpack-dev \
+        python-pip
+        
+    ## get every file in dev and common folder
+    wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/
+    wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/
+        
+    source ~/.bashrc
+    source /opt/ros/melodic/setup.bash
+        
+    ## ADD ssh key on github before pulling git
+    ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
+
+    cat ~/.ssh/id_rsa.pub
+    echo "Set your github account than press enter to reboot your PC"
+    read test
+    reboot
 }
 
 function install_pc_environment() {
-    echo "PC: TO BE IMPLEMENTED"
+     ## Add source to ROS melodic
+    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+    sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+    #Install basic system dependcies and upgrades
+    sudo apt update -y && sudo apt upgrade -y
+    sudo apt install -y -f \
+        make \
+        gcc \
+        cmake \
+        git \
+        vim \
+        ros-melodic-ros-base  \
+        lm-sensors \
+        libglade2-dev \
+        libxext-dev \
+        ethtool \
+        libdc1394-22-dev \
+        libarmadillo-dev \
+        libmlpack-dev \
+        python-pip
+
+    ## Install DALSA GiGe API Framework
+    cd /opt
+    sudo wget http://sonia-auv.readthedocs.org/assets/files/GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
+    sudo tar zxvf GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
+    cd DALSA
+    ./corinstall
+    
+    ## get every file in dev and common folder
+    wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/pc/
+    wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/
+        
+    source ~/.bashrc
+    source /opt/ros/melodic/setup.bash
+    reboot
 }
 
 function install_jetson_agx_environment() {
