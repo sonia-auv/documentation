@@ -24,7 +24,7 @@ Providers
 The provider layer contains all packages that allows us to have the raw data dans basic access on our devices.
 Theses packages aims to be general and independent of the model of the device that is being used.
 
-ROS is great for this king of application, we provide services and messages on every provider for accessing the features and datas of the devices.
+ROS is great for this kind of application, we provide services and messages on every provider for accessing the features and datas of the devices.
 
 The design also aims to be as flexible as possible and changing the model of a specific provider should be a matter of adding a driver class.
 
