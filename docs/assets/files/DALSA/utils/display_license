@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+echo ""
+echo "================ Begin License File =================="
+echo ""
+more $1 
+echo ""
+echo "================  End   License File =================="
+echo ""
+read -p "Press return to continue : "
+

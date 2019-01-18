@@ -1,0 +1,138 @@
+#!/bin/bash
+#
+# Net configuration tweaking for GigeVision cameras.
+#
+# Adjustable configuration parameters.
+max_cameras=2
+image_size=$((2048*2048*2))
+#
+#
+if [ $UID != 0 ]; then
+   echo "You have to be the superuser to run this program!"
+   echo "Either use sudo (preferred) or switch to root user"
+   exit 1
+fi
+
+#
+# Set up the net interface number.
+if [ $# -eq 0 ] ; then
+    echo "Usage : $0 <netif_name>"
+    echo "    e.g. $0 eth0"
+    exit 1
+else
+    netif_name=$1
+fi 
+#
+# Figure out a decent (supported) MTU here.
+# (Genie camera max is 9152 - so start at 9216 and work downwards by 128).
+netif_mtu=9216
+netif_mtu_dec=128
+status=0
+while [ $status -eq 0 ] 
+do
+    result="$(ifconfig $netif_name mtu $netif_mtu 2>&1)"
+    if [ "$result" != "" ] ; then
+        ((netif_mtu-=netif_mtu_dec))
+    else
+        status=1
+    fi
+done
+# Make sure that 1500 is the minimum mtu.
+if [ $netif_mtu -lt 1500 ] ; then
+    netif_mtu=1500
+fi
+echo "mtu setting for $netif_name is now $netif_mtu"
+#
+#
+# Adjust the MTU for jumbo frames (9152 maximum)
+ifconfig $netif_name mtu $netif_mtu
+# 
+# Adjust the minimum receive buffer allocation
+# (Has PAGESIZE granularity - assume PAGESIZE is 4096).
+if [ $netif_mtu -gt 4096 ] ; then
+    if [ $netif_mtu -gt 8192 ] ; then
+        sysctl -w net.ipv4.udp_rmem_min=12288
+    else
+        sysctl -w net.ipv4.udp_rmem_min=8192
+    fi
+else
+    sysctl -w net.ipv4.udp_rmem_min=4096
+fi
+#
+# Adjust the network device backlog here
+# (This helps when intercepting packets at the device
+#  using the PF_PACKET interface).
+backlogmax=2500
+backlog=$(cat /proc/sys/net/core/netdev_max_backlog)
+if [ "$backlog" != "" ] ; then
+    if [ $backlog -lt $backlogmax ] ; then
+        newbacklog=$backlogmax
+    else
+        newbacklog=$backlog
+    fi
+else
+    newbacklog=$backlogmax
+fi 
+sysctl -w net.core.netdev_max_backlog=$newbacklog
+#
+# Adjust the network stack settings here.
+# Tuning is based on the number of cameras expected
+# in the system and the image size the cameras will output.
+#
+# Ensure 2 frames can be queued on the stack.
+#
+#
+# Adjust the queue length for UDP packets
+#
+qlength=$(( 2*max_cameras*(image_size / netif_mtu) ))
+sysctl -w net.unix.max_dgram_qlen=$qlength
+#
+# Adjust the default (and maximum) memory for receiving network packets
+#
+defrmem=$((2*image_size))
+maxrmem=$((3*image_size))
+rmemdefault=$(cat /proc/sys/net/core/rmem_default)
+rmemmax=$(cat /proc/sys/net/core/rmem_max)
+if [ $rmemmax -lt $maxrmem ] ; then
+    sysctl -w net.core.rmem_max=$maxrmem
+fi
+if [ $rmemdefault -lt $defrmem ] ; then
+    sysctl -w net.core.rmem_default=$defrmem
+fi
+#
+# Use "ethtool" to adjust the setting of the network device drivers
+# to optimize the rx_ring for maximum throughput. We need this to
+# receive image data packets from the cameras. (Sending to the camera
+# is not as critical)
+#
+#ETHTOOL="/usr/sbin/ethtool -g $(netif_name)"
+ETHTOOL=$(which ethtool)
+if [[ $ETHTOOL ]] ; then
+    if [ -x /usr/sbin/ethtool ] ; then
+        RX_JUMBO=`$ETHTOOL -g $netif_name  | awk "\\$2 == \"Jumbo:\" { print \\$3 }" -`
+        RX_JUMBOMAX=`echo $RX_JUMBO | awk """ { print \\$1 }" -`
+        RX_JUMBOCUR=`echo $RX_JUMBO | awk """ { print \\$2 }" -`
+        if [ "$RX_JUMBOMAX" != "$RX_JUMBOCUR" ] ; then
+            if [ "$RX_JUMBOMAX" != "" ] ; then
+                $ETHTOOL -G $netif_name rx-jumbo $RX_JUMBOMAX
+            fi
+        fi
+        RX_VALUE=`$ETHTOOL -g $netif_name  | awk "\\$1 == \"RX:\" { print \\$2 }" -`
+        RX_MAXIMUM=`echo $RX_VALUE | awk """ { print \\$1 }" -`
+        RX_CURRENT=`echo $RX_VALUE | awk """ { print \\$2 }" -`
+        if [ "$RX_MAXIMUM" != "$RX_CURRENT" ] ; then
+            if [ "$RX_MAXIMUM" != "" ] ; then
+                $ETHTOOL -G $netif_name rx $RX_MAXIMUM
+            fi
+        fi
+        # Turn off PAUSE on rx operations
+        $ETHTOOL -A $netif_name rx off
+    fi
+else
+    echo "*** Unable to adjust NIC driver settings ***"
+    echo "*** /usr/sbin/ethtool utility not found  ***"
+fi
+
+
+
+

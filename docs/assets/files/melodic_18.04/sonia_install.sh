@@ -62,6 +62,7 @@ function usage() {
 # Environement installation functions
 ########################################################################################################
 
+
 function install_dev_environment() {
     echo "DEV: TO BE IMPLEMENTED"
 }
@@ -71,7 +72,51 @@ function install_pc_environment() {
 }
 
 function install_jetson_agx_environment() {
-    echo "AGX: TO BE IMPLEMENTED"
+   ## Add source to ROS melodic
+    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+    sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+
+    #Install basic system dependcies and upgrades
+    sudo apt update -y && sudo apt upgrade -y
+    sudo apt install -y -f \
+        make \
+        gcc \
+        cmake \
+        git \
+        vim \
+        ros-melodic-ros-base  \
+        lm-sensors \
+        libglade2-dev \ # Gige
+        libxext-dev \ # Gige
+        ethtool \ # Gige
+        libqwt-dev \ # Qt widgets library for technical applications (development, qt4)
+        libdc1394-22-dev \ # Useless selon moi  IEEE1394 (CAM) Pas mentionner dans GigE
+        libarmadillo-dev \
+        libmlpack-dev \
+        python-pip
+
+    ## Install DALSA GiGe API Framework
+    cd /opt
+    sudo wget http://sonia-auv.readthedocs.org/assets/files/GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
+    sudo tar zxvf GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
+    cd DALSA
+    ./corinstall
+
+    #Installing Jetson AGX Specific for tensorflow
+    sudo apt install -y -f \
+        ibhdf5-serial-dev \
+        hdf5-tools
+        zlib1g-dev \
+        zip \
+        libjpeg8-dev \
+        libhdf5-dev
+
+
+
+
+
+
+
 }
 
 function install_jetson_tx2_environment() {

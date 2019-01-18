@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<!--Generated with glade3 3.4.5 on Thu Apr 30 01:07:26 2009 -->
+<glade-interface>
+  <widget class="GtkWindow" id="window1">
+    <property name="visible">True</property>
+    <property name="app_paintable">True</property>
+    <property name="title" translatable="yes">DALSA GigE Vision Device Status</property>
+    <property name="icon">DALSAtool.ico</property>
+    <signal name="destroy" handler="on_window1_destroy" object="void"/>
+    <child>
+      <widget class="GtkFrame" id="frame1">
+        <property name="visible">True</property>
+        <property name="app_paintable">True</property>
+        <property name="label_xalign">0</property>
+        <property name="label_yalign">1</property>
+        <property name="shadow_type">GTK_SHADOW_NONE</property>
+        <child>
+          <widget class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="visible">True</property>
+            <property name="app_paintable">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <child>
+              <widget class="GtkViewport" id="viewport1">
+                <property name="visible">True</property>
+                <property name="app_paintable">True</property>
+                <property name="resize_mode">GTK_RESIZE_QUEUE</property>
+                <child>
+                  <widget class="GtkTreeView" id="treeview1">
+                    <property name="visible">True</property>
+                    <property name="app_paintable">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="headers_clickable">False</property>
+                    <property name="enable_search">False</property>
+                    <property name="enable_grid_lines">GTK_TREE_VIEW_GRID_LINES_BOTH</property>
+                    <property name="enable_tree_lines">True</property>
+                    <signal name="row-activated" handler="gtk_widget_show" object="void"/>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+          </widget>
+        </child>
+	<!--
+        <child>
+          <widget class="GtkButton" id="button1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="label" translatable="yes">Exit</property>
+            <property name="response_id">0</property>
+            <signal name="clicked" handler="exit_button_clicked_cb" after="yes" object="void"/>
+          </widget>
+          <packing>
+            <property name="type">label_item</property>
+          </packing>
+        </child>
+	-->
+      </widget>
+    </child>
+  </widget>
+</glade-interface>

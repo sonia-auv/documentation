@@ -1,0 +1,162 @@
+#!/bin/bash
+#!/bin/ksh
+#-----------------------------------------------------------------------------
+# corinstall
+#					Copyright(C) Coreco Inc. 2004
+#						All rights reserved.
+#
+# Description:
+#       Manual install script for Coreco modules for Linux
+#       (Simply installs from the distribution tree or uninstalls)
+#
+# History:
+#  $Log: corinstall $
+#  Revision 1.6  2005/02/15 15:20:01  parhug
+#  Updated command line handling to make uninstalling more intuitive.
+#  Revision 1.5  2005/01/10 09:42:20  BOUERI
+#  - Use new installation tools to get file name.
+#  Revision 1.4  2004/12/17 14:45:47  BOUERI
+#  Revision 1.3  2004/12/16 12:13:34  BOUERI
+#  - Update installing method to support multiple platforms.
+#  Revision 1.2  2004/11/18 12:24:05  BOUERI
+#  Revision 1.1  2004/10/26 09:13:08  BOUERI
+#  Initial revision
+#
+# Initial revision
+#-----------------------------------------------------------------------------
+#
+# Figure out what to do.
+#
+
+#if [ $UID != 0 ]; then
+   # echo "You have to be root to run this program!"
+   # exit 1
+#fi
+
+function usage()
+{
+    INST_LIST=`find -name "install.*"`
+    STRING_LIST=""
+	for i in $INST_LIST; do 	
+	    STRING_LIST="$STRING_LIST, '`$i Info product_string`'"
+	done
+	
+    echo "Usage : ./corinstall <product> <option>"
+    echo "        <product> can be 'all' (default) $STRING_LIST"
+    echo "        <option> can be 'install' (default) or 'uninstall'"
+    return 0
+}
+
+function build_product_list()
+{
+    PRODICT_LIST=""
+    INST_LIST=`find -name "install.*"`
+
+	# sort
+    for i in $INST_LIST; do
+	CURENT_DEVICE=`$i Info product_string`
+	if [ $OPTION == "Install" ]; then
+		if [ "Sapera"  == "$CURENT_DEVICE" ]; then
+			PRODICT_LIST="$i $PRODICT_LIST"
+		else
+			PRODICT_LIST="$PRODICT_LIST $i"
+		fi
+	elif [ $OPTION == "Uninstall" ]; then
+		if [ "Sapera" == "$CURENT_DEVICE" ]; then
+			PRODICT_LIST="$PRODICT_LIST $i"
+		else
+			PRODICT_LIST="$i $PRODICT_LIST"
+		fi
+	fi
+	done
+}
+
+
+if [ $# -eq 0 ] ; then
+    PRODUCT="all"
+else
+	if [ $1 != "Info" ]; then
+		PRODUCT=$1
+	fi
+fi
+
+if [ $# -gt 2 ] ; then
+    usage
+    exit 1
+fi
+
+if [ $# -eq 1 ] ; then
+	if [ $1 == "Info" ]; then
+		OPTION="Info"
+	elif [ $1 == "?" ] ; then
+		usage
+		exit 1
+	elif [ $1 == "Help" ] ; then
+		usage
+		exit 1
+	elif [ $1 == "help" ] ; then
+		usage
+		exit 1
+	elif [ $1 == "uninstall" ]; then
+		OPTION="Uninstall"
+		PRODUCT="all"
+	elif [ $1 == "Uninstall" ]; then
+		OPTION="Uninstall"
+		PRODUCT="all"
+	elif [ $1 == "install" ]; then
+		OPTION="install"
+		PRODUCT="all"
+	elif [ $1 == "Install" ]; then
+		OPTION="install"
+		PRODUCT="all"
+	 else
+	    OPTION="Install"
+	 fi
+elif [ $# -eq 0 ] ; then
+    OPTION="Install"
+else
+    OPTION=$2
+fi
+
+if [ $OPTION == "Info" ]; then
+	echo "DALSA Installation Manager for:"
+    INST_LIST=`find -name "install.*"`
+	for i in $INST_LIST; do
+	    echo "`$i Info`"
+	done
+	exit 0
+fi
+
+if  [ $OPTION == "install" ] ; then
+    OPTION="Install"
+fi
+
+if  [ $OPTION == "uninstall" ] ; then
+    OPTION="Uninstall"
+fi
+
+
+IROOT=`pwd`
+
+build_product_list
+
+for i in $PRODICT_LIST; do 
+    INSTALL_I="FALSE"
+    for TEST_PRODUCT in "all" "All" "ALL" `$i Info product_string_list`; do
+	if [ $PRODUCT == $TEST_PRODUCT ] ; then
+	    INSTALL_I="TRUE"
+	    break
+	fi
+    done
+    if [ $INSTALL_I == "TRUE" ]; then
+	SCRIPT_NAME=`echo $i | awk -F/ '{print $(NF)'}`
+	SCRIPT_PATH=`echo $i | awk -F$SCRIPT_NAME '{print $1}'`
+	
+	echo "$OPTION""ing `$i Info`"
+	
+	cd $SCRIPT_PATH
+	./$SCRIPT_NAME $OPTION
+	cd $IROOT
+    fi
+done
+
