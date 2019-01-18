@@ -42,12 +42,12 @@ mpi4py==1.3.1
 msgpack-python==0.4.6
 netifaces==0.10.4
 nose==1.3.7
-numpy==1.11.0
+#numpy==1.11.0
 PAM==0.4.2
 paramiko==1.16.0
 Pillow==3.1.2
 pluginlib==1.11.2
-psutil==3.4.2
+#psutil==3.4.2
 pyasn1==0.1.9
 pyasn1-modules==0.0.7
 pycrypto==2.6.1
@@ -146,3 +146,19 @@ wxPython==3.0.2.0
 wxPython-common==3.0.2.0
 xacro==1.11.2
 zope.interface==4.1.3
+numpy==1.16.0
+grpcio==1.18.0
+absl-py==0.7.0
+py-cpuinfo==4.0.0
+psutil==5.4.8
+portpicker==1.3.0
+six==1.12.0
+mock==2.0.0
+requests==2.21.0
+gast==0.2.2
+h5py==2.9.0
+astor==0.7.1
+termcolor==1.1.0
+
+-i https://developer.download.nvidia.com/compute/redist/jp/v411
+tensorflow-gpu

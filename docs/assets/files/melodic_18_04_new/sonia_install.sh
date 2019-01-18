@@ -144,14 +144,15 @@ function install_pc_environment() {
 }
 
 function install_jetson_agx_environment() {
+   ##TODO: Review handle two part (With env var ???
+   ##TODO: Complete install
    ## Add source to ROS melodic
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
     sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
     #Install basic system dependcies and upgrades
     sudo apt update -y && sudo apt upgrade -y
-    sudo apt install -y -f \
-        make \
+    sudo apt install -y -f make \
         gcc \
         cmake \
         git \
@@ -183,6 +184,26 @@ function install_jetson_agx_environment() {
         libjpeg8-dev \
         libhdf5-dev
 
+    ## install the bash script
+    echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
+    echo "  . ~/.bash_sonia" >> ~/.bashrc
+    echo "fi" >> ~/.bashrc
+
+    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/bash_aliases -O ~/.bash_aliases
+    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/bash_sonia -O ~/.bash_sonia
+
+    source ~/.bashrc
+    source /opt/ros/melodic/setup.bash
+
+    ## ADD ssh key on github before pulling git
+    ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
+
+    cat ~/.ssh/id_rsa.pub
+    echo "Set your github account than press enter to reboot your PC"
+    read test
+    reboot
 
 
 
