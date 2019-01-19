@@ -1,0 +1,77 @@
+# SONIA Configuration
+
+## Environment variables
+IP_ADDRESS=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
+export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
+export ROS_SONIA_WS=~/Workspaces/ros_sonia_ws/
+export ROS_MASTER_URI=http://localhost:11311/
+# export ROS_MASTER_URI=http://192.168.0.11:11311/
+export ROS_HOME=$ROS_SONIA_WS
+export ROS_IP=${IP_ADDRESS}
+export LC_ALL="en_US.UTF-8"
+export EDITOR="vim"
+export SONIA_ENVIRONMENT=devel
+export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
+
+## ROS specific configurations
+source /opt/ros/melodic/setup.bash
+if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
+    source $ROS_SONIA_WS/devel/setup.bash
+fi
+
+## Useful aliases
+alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
+alias babe='ssh -X sonia@192.168.0.11'
+alias jetson='ssh -X nvidia@192.168.0.13'
+alias babe?='ping 192.168.0.11'
+alias switch?='ping 192.168.0.12'
+alias jetson?='ping 192.168.0.13'
+alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
+alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
+alias sonia-wakeup='wol 00:30:18:b0:3d:f4'
+
+alias telemetry='rqt --perspective-file ${ROS_SONIA_WS}/src/rqt_sonia_plugins/SONIA.perspective'
+alias controlSub='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Control.perspective'
+alias dry_test='rqt --perspective-file ${ROS_SONIA_WS}/perspective/dry_test.perspective'
+alias pool='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Test_piscine.perspective'
+
+## useful function
+function comp () {
+    cd ${ROS_SONIA_WS}
+    catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
+    cd -
+}
+
+function full_poof () {
+    ssh sonia@192.168.0.11 "source /etc/profile; poof"
+    ssh nvidia@192.168.0.13 "source /etc/profile; poof"
+}
+
+function comp_reset () {
+    cd ${ROS_SONIA_WS}
+    rm -rf devel/ build/
+    catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
+    cd -
+}
+
+function swap_babe () {
+    if [ ${ROS_MASTER_URI} == 'http://localhost:11311/' ]
+    then
+        export ROS_MASTER_URI=http://192.168.0.11:11311/
+    elif [ ${ROS_MASTER_URI} == 'http://192.168.0.11:11311/' ]
+    then
+        export ROS_MASTER_URI=http://localhost:11311/
+    fi
+}
+
+function update-sonia-script () {
+
+    ping -c1 readthedocs.org 2>/dev/null 1>/dev/null
+    if [ "$?" = 0 ]
+    then
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/bash_sonia_dev -O ~/.bash_sonia
+        source ~/.bash_sonia
+    else
+        echo "Host not found"
+    fi
+}
