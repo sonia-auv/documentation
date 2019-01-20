@@ -9,7 +9,7 @@ SONIA's CAN communication standard is explained in another documentation.
 2. Led indicator,
 3. Diver interface,
 4. Hydrophones,
-5. thrusters (6),
+5. thrusters (8),
 6. Power supply,
 7. Mission switch,
 8. Droppers,
