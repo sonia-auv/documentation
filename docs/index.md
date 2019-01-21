@@ -17,7 +17,7 @@ This documentation is organized into a couple section:
 - [Software Documentation](#software)
 - [Electrical Documentation](#electrical)
 - [Mechanical Documentation](#mechanical)
-- [Proof of Concept (French only)](#POC)
+- [Proof of Concept](#POC)
 - [About S.O.N.I.A.](#about)
 
 
