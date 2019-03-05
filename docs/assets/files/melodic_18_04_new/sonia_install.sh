@@ -76,14 +76,17 @@ function install_dev_environment() {
         sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
         
         sudo apt update -y && sudo apt dist-upgrade -y
-        sudo apt install -y -f \
-            make \
+        sudo apt install -y -f make \
             gcc \
             cmake \
             git \
             vim \
             ros-melodic-desktop-full  \
+            lm-sensors \
+            libglade2-dev \
+            libxext-dev \
             libqwt-dev \
+            libdc1394-22-dev \
             libarmadillo-dev \
             libmlpack-dev \
             python-pip
@@ -123,8 +126,7 @@ function install_dev_environment() {
     
 }
 
-function install_pc_environment() {
-
+function install_jetson_agx_environment() {
     if [ -z "$SONIA_WORKSPACE_ROOT" ]; then
         ## Add source to ROS melodic
         sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -132,37 +134,58 @@ function install_pc_environment() {
 
         #Install basic system dependcies and upgrades
         sudo apt update -y && sudo apt upgrade -y
-        sudo apt install -y -f \
-            make \
+        sudo apt install -y -f make \
             gcc \
             cmake \
             git \
             vim \
-            ros-melodic-ros-base  \
+            ros-melodic-desktop-full  \
             lm-sensors \
             libglade2-dev \
             libxext-dev \
-            ethtool \
+            libqwt-dev \
             libdc1394-22-dev \
             libarmadillo-dev \
             libmlpack-dev \
-            python-pip
-
-        ## Install DALSA GiGe API Framework
-        cd /opt
-        sudo wget http://sonia-auv.readthedocs.org/assets/files/GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
-        sudo tar zxvf GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
-        cd DALSA
-        ./corinstall
+            python-pip \
+            ibhdf5-serial-dev \
+            hdf5-tools
+            zlib1g-dev \
+            zip \
+            libjpeg8-dev \
+            libhdf5-dev
         
         ## get every file in dev and common folder
-        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/pc/
+        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/
         wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/
-            
+        
+        ## install python package for Tensorflow
+        pip install -U pip
+        sudo pip install -U numpy grpcio absl-py py-cpuinfo psutil portpicker grpcio six mock requests gast h5py astor termcolor
+        pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v411 tensorflow-gpu
+
+        ## Install DALSA GiGe API Framework
+        sudo tar zxvf GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
+        cd DALSA
+        ./corinstall
+
+        ## install the bash script
+        echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
+        echo "  . ~/.bash_sonia" >> ~/.bashrc
+        echo "fi" >> ~/.bashrc
+
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
+
+        ## ADD ssh key on github before pulling git
+        ssh-keygen -t rsa -b 4096 -C "you@email.ext"
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+
+        cat ~/.ssh/id_rsa.pub
+        echo "Set your github account than press enter to reboot your PC"
+        read test
         reboot
-    
     else
         ## fetch the SONIA repository
         git clone git@github.com:sonia-auv/ros_sonia_ws.git $ROS_SONIA_WS
@@ -179,79 +202,12 @@ function install_pc_environment() {
         catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
         source devel/setup.bash
     fi
-}
-
-function install_jetson_agx_environment() {
-   ##TODO: Review handle two part (With env var ???
-   ##TODO: Complete install
-   ## Add source to ROS melodic
-    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-    sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-
-    #Install basic system dependcies and upgrades
-    sudo apt update -y && sudo apt upgrade -y
-    sudo apt install -y -f make \
-        gcc \
-        cmake \
-        git \
-        vim \
-        ros-melodic-ros-base  \
-        lm-sensors \
-        libglade2-dev \ # Gige
-        libxext-dev \ # Gige
-        ethtool \ # Gige
-        libqwt-dev \ # Qt widgets library for technical applications (development, qt4)
-        libdc1394-22-dev \ # Useless selon moi  IEEE1394 (CAM) Pas mentionner dans GigE
-        libarmadillo-dev \
-        libmlpack-dev \
-        python-pip
-
-    ## Install DALSA GiGe API Framework
-    cd /opt
-    sudo wget http://sonia-auv.readthedocs.org/assets/files/GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
-    sudo tar zxvf GigE-V-Framework_aarch64_2.10.0.0157.tar.gz
-    cd DALSA
-    ./corinstall
-
-    #Installing Jetson AGX Specific for tensorflow
-    sudo apt install -y -f \
-        ibhdf5-serial-dev \
-        hdf5-tools
-        zlib1g-dev \
-        zip \
-        libjpeg8-dev \
-        libhdf5-dev
-
-    ## install the bash script
-    echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
-    echo "  . ~/.bash_sonia" >> ~/.bashrc
-    echo "fi" >> ~/.bashrc
-
-    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/bash_aliases -O ~/.bash_aliases
-    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/bash_sonia -O ~/.bash_sonia
-
-    source ~/.bashrc
-    source /opt/ros/melodic/setup.bash
-
-    ## ADD ssh key on github before pulling git
-    ssh-keygen -t rsa -b 4096 -C "you@email.ext"
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa
-
-    cat ~/.ssh/id_rsa.pub
-    echo "Set your github account than press enter to reboot your PC"
-    read test
-    reboot
 
 
 
 
 
 
-}
-
-function install_jetson_tx2_environment() {
-    echo "TX2: BE IMPLEMENTED"
 }
 
 ########################################################################################################
@@ -291,9 +247,7 @@ print_sonia_logo
 echo "Select target environment installation by entring the number of the element followed by [ENTER]:"
 echo
 echo "1) Development PC"
-echo "2) Production PC"
-echo "3) Jetson AGX"
-echo "4) Jetson TX2"
+echo "2) Jetson AGX"
 echo
 
 read TARGET_ENV
@@ -304,13 +258,7 @@ case $TARGET_ENV in
         install_dev_environment $INSTALL_PART
         ;;
     "2")
-        install_pc_environment $INSTALL_PART
-        ;;
-    "3")
         install_jetson_agx_environment $INSTALL_PART
-        ;;
-    "4")
-        install_jetson_tx2_environment $INSTALL_PART
         ;;
 
 esac
