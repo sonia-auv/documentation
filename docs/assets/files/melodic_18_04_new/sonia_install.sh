@@ -201,6 +201,8 @@ function install_jetson_agx_environment() {
         ## compilation
         catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
         source devel/setup.bash
+
+        echo "this is the agx setup, so don't forget to add a dhcp server, ssh server, disable the GUI and allow people to enter by public rsa key"
     fi
 
 
@@ -246,7 +248,7 @@ print_sonia_logo
 
 echo "Select target environment installation by entring the number of the element followed by [ENTER]:"
 echo
-echo "1) Development PC"
+echo "1) Development PC (default)"
 echo "2) Jetson AGX"
 echo
 
