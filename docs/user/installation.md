@@ -68,12 +68,11 @@ Then resource your `.bashrc`:
 Installing software is really simple, just execute the following command and enjoy the show (Be aware that at some point you might need to do some actions[ i.e press ENTER]):
 
 	cd ~
-	wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/sonia-install-1 -O ~/sonia-install-1
-	wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/sonia-install-2 -O ~/sonia-install-2
-	sudo chmod +x sonia-install-1 sonia-install-2
-	./sonia-install-1
+	wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04_new/sonia-install.sh
+	sudo chmod +x sonia-install.sh
+	./sonia-install.sh
 	# SYSTEM WILL REBOOT. AFTER IT, EXECUTE THE FOLLOWING :
-	./sonia-install-2
+	./sonia-install.sh
 	
-	# Then remove the two files
-	rm sonia-install-1 sonia-install-2
+	# Then remove the file
+	rm sonia-install.sh

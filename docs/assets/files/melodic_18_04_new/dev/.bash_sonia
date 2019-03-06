@@ -13,17 +13,11 @@ export EDITOR="vim"
 export SONIA_ENVIRONMENT=devel
 export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 
-## virtualenv environment variables
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 ## ROS specific configurations
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/melodic/setup.bash
 if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
-
-workon virtual_babe
 
 ## Useful aliases
 alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
@@ -48,9 +42,8 @@ function comp () {
     cd -
 }
 
-function full_poof () {
+function remote_poof () {
     ssh sonia@192.168.0.11 "source /etc/profile; poof"
-    ssh nvidia@192.168.0.13 "source /etc/profile; poof"
 }
 
 function comp_reset () {
@@ -75,7 +68,7 @@ function update-sonia-script () {
     ping -c1 readthedocs.org 2>/dev/null 1>/dev/null
     if [ "$?" = 0 ]
     then
-        wget http://sonia-auv.readthedocs.org/assets/files/ugnome_16.04/bash_sonia_dev -O ~/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18.04/dev/bash_sonia -O ~/.bash_sonia
         source ~/.bash_sonia
     else
         echo "Host not found"

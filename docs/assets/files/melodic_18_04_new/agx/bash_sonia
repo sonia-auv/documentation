@@ -18,15 +18,14 @@ export SONIA_ENVIRONMENT=jetson
 export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
 
 # ------------------------------------------------------------------------------------------------
-# Jetson TX2 SONIA Aliases
+# Jetson AGX SONIA Aliases
 
 alias babe?='ping 192.168.0.11'
 alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
-alias deep_detector='cd ${ROS_SONIA_WS}/src/deep_detector'
 
 alias consumption='~/jetson_consumption.sh'
-alias powerup='sudo -S ~/jetson_clock.sh'
+alias powerup='sudo -S ~/jetson_clock.sh && sudo nvpmodel -m 0'
 alias poof='sudo -S poweroff'
 alias repoof='sudo -S reboot'
 
@@ -47,14 +46,8 @@ function comp_reset () {
 }
 
 function update-sonia-script () {
-    ping -c1 readthedocs.org 2>/dev/null 1>/dev/null
-    if [ "$?" = 0 ]
-    then
-        wget http://sonia-auv.readthedocs.org/assets/files/ubuntu_18.04/bash_sonia_jetson -O ~/.bash_sonia
-        source ~/.bash_sonia
-    else
-        echo "Host not found"
-    fi
+    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/bash_sonia -O ~/.bash_sonia
+    source ~/.bash_sonia
 }
 
 
@@ -62,17 +55,9 @@ function update-sonia-script () {
 # Execute on load
 
 ## ROS specific configurations
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/melodic/setup.bash
 if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
 
 powerup
-
-
-
-
-
-
-
-
