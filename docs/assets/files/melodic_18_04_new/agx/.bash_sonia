@@ -25,7 +25,7 @@ alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
 
 alias consumption='~/jetson_consumption.sh'
-alias powerup='sudo -S ~/jetson_clock.sh && sudo nvpmodel -m 0'
+alias powerup='sudo -S ~/jetson_clocks.sh && sudo nvpmodel -m 0'
 alias poof='sudo -S poweroff'
 alias repoof='sudo -S reboot'
 

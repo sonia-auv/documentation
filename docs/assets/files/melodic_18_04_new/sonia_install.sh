@@ -92,8 +92,10 @@ function install_dev_environment() {
             python-pip
             
         ## get every file in dev and common folder
-        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/
-        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/GigE-V-Framework_x86_2.00.0.0108.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
             
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
@@ -149,15 +151,17 @@ function install_jetson_agx_environment() {
             libmlpack-dev \
             python-pip \
             ibhdf5-serial-dev \
-            hdf5-tools
+            hdf5-tools \
             zlib1g-dev \
             zip \
             libjpeg8-dev \
             libhdf5-dev
         
         ## get every file in dev and common folder
-        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/
-        wget -r --no-parent http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
         
         ## install python package for Tensorflow
         pip install -U pip
@@ -228,31 +232,6 @@ function install_jetson_agx_environment() {
 
 # Main script
 ########################################################################################################
-
-while [ "$1" != "" ]; do
-    PARAM=`echo $1 | awk -F= '{print $1}'`
-    VALUE=`echo $1 | awk -F= '{print $2}'`
-    case $PARAM in
-        -h | --help)
-            usage
-            exit
-            ;;
-        --part)
-            INSTALL_PART=$VALUE
-            ;;
-        *)
-            echo "ERROR: unknown parameter \"$PARAM\""
-            usage
-            exit 1
-            ;;
-    esac
-    shift
-done
-
-if [ "${INSTALL_PART}" -lt 1 ] || [ "${INSTALL_PART}" -gt 2 ] ; then
-    # TODO: Validate why this is not working (Error msg)
-    error || "Installation script part attribute value must be 1 or 2"
-fi
 
 
 print_sonia_logo
