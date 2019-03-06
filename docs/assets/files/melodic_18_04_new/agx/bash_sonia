@@ -17,17 +17,12 @@ export ROS_MAVEN_DEPLOYMENT_REPOSITORY=$HOME/.m2/repository/
 export SONIA_ENVIRONMENT=jetson
 export SONIA_WORKSPACE_ROOT=~/Workspaces/sonia_ws/
 
-## Virutalenv environment variables
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 # ------------------------------------------------------------------------------------------------
 # Jetson AGX SONIA Aliases
 
 alias babe?='ping 192.168.0.11'
 alias sonia-source='source ${ROS_SONIA_WS}/devel/setup.bash'
 alias sonia-cd='cd ${ROS_SONIA_WS} && sonia-source'
-alias deep_detector='cd ${ROS_SONIA_WS}/src/deep_detector'
 
 alias consumption='~/jetson_consumption.sh'
 alias powerup='sudo -S ~/jetson_clock.sh && sudo nvpmodel -m 0'
@@ -51,7 +46,7 @@ function comp_reset () {
 }
 
 function update-sonia-script () {
-    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/bash_sonia_jetson -O ~/.bash_sonia
+    wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/bash_sonia -O ~/.bash_sonia
     source ~/.bash_sonia
 }
 
@@ -65,5 +60,4 @@ if [ -f $ROS_SONIA_WS/devel/setup.bash ]; then
     source $ROS_SONIA_WS/devel/setup.bash
 fi
 
-workon virtual_babe
 powerup

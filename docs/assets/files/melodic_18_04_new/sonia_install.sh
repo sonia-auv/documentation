@@ -213,7 +213,7 @@ function install_jetson_agx_environment() {
         catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
         source devel/setup.bash
 
-        echo "this is the agx setup, so don't forget to add a dhcp server, ssh server, disable the GUI and allow people to enter by public rsa key"
+        echo "this is the agx setup, so don't forget to add a dhcp server, change password, change the hostname, disable the GUI, assign usb with udev, set an static IP adress and allow people to enter by public rsa key"
     fi
 
 
