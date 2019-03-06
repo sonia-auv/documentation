@@ -76,3 +76,15 @@ Installing software is really simple, just execute the following command and enj
 	
 	# Then remove the file
 	rm sonia_install.sh
+
+### <a name="soft_auv7"></a> Fix network problem on Jetson AGX
+
+	sudo su
+  echo 'net.ipv4.udp_rmem_min = 12288' >> /etc/sysctl.conf
+  echo 'net.core.netdev_max_backlog = 4096' >> /etc/sysctl.conf
+  echo 'net.unix.max_dgram_qlen = 118148' >> /etc/sysctl.conf
+  echo 'net.core.rmem_max = 536870912' >> /etc/sysctl.conf
+  echo 'net.core.rmem_default = 536870912' >> /etc/sysctl.conf
+
+  sysctl -p
+  exit

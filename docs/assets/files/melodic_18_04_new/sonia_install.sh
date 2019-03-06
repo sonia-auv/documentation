@@ -186,17 +186,6 @@ function install_jetson_agx_environment() {
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
 
-        ## change network value for DALSA and Tritech
-        sudo su
-        echo 'net.ipv4.udp_rmem_min = 12288' >> /etc/sysctl.conf
-        echo 'net.core.netdev_max_backlog = 4096' >> /etc/sysctl.conf
-        echo 'net.unix.max_dgram_qlen = 118148' >> /etc/sysctl.conf
-        echo 'net.core.rmem_max = 536870912' >> /etc/sysctl.conf
-        echo 'net.core.rmem_default = 536870912' >> /etc/sysctl.conf
-
-        sysctl -p
-        exit
-
         ## ADD ssh key on github before pulling git
         ssh-keygen -t rsa -b 4096 -C "you@email.ext"
         eval "$(ssh-agent -s)"
@@ -222,7 +211,7 @@ function install_jetson_agx_environment() {
         catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
         source devel/setup.bash
 
-        echo "this is the agx setup, so don't forget to add a dhcp server, change password, change the hostname, disable the GUI, assign usb with udev, set an static IP adress and allow people to enter by public rsa key"
+        echo "this is the agx setup, so don't forget to add a dhcp server, change password, run the network fix, change the hostname, disable the GUI, assign usb with udev, set an static IP adress and allow people to enter by public rsa key"
     fi
 
 
