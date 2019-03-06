@@ -149,7 +149,7 @@ function install_jetson_agx_environment() {
             libmlpack-dev \
             python-pip \
             ibhdf5-serial-dev \
-            hdf5-tools
+            hdf5-tools \
             zlib1g-dev \
             zip \
             libjpeg8-dev \
