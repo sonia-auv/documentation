@@ -92,10 +92,15 @@ function install_dev_environment() {
             python-pip
             
         ## get every file in dev and common folder
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/.bash_sonia
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/GigE-V-Framework_x86_2.00.0.0108.gz
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/bash_sonia -O ~/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/GigE-V-Framework_x86_2.00.0.0108.gz -O ~/GigE-V-Framework_x86_2.00.0.0108.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bashrc -O ~/.bashrc
+
+        ## Install DALSA GiGe API Framework
+        sudo tar zxvf /GigE-V-Framework_x86_2.00.0.0108.gz
+        cd DALSA
+        sudo ./corinstall
             
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
@@ -158,10 +163,10 @@ function install_jetson_agx_environment() {
             libhdf5-dev
         
         ## get every file in dev and common folder
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/.bash_sonia
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/bash_sonia -O ~/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz -O ~/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bashrc -O ~/.bashrc
         
         ## install python package for Tensorflow
         pip install -U pip
@@ -171,7 +176,7 @@ function install_jetson_agx_environment() {
         ## Install DALSA GiGe API Framework
         sudo tar zxvf GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
         cd DALSA
-        ./corinstall
+        sudo ./corinstall
 
         ## install the bash script
         echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
@@ -180,17 +185,6 @@ function install_jetson_agx_environment() {
 
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
-
-        ## change network value for DALSA and Tritech
-        sudo su
-        echo 'net.ipv4.udp_rmem_min = 12288' >> /etc/sysctl.conf
-        echo 'net.core.netdev_max_backlog = 4096' >> /etc/sysctl.conf
-        echo 'net.unix.max_dgram_qlen = 118148' >> /etc/sysctl.conf
-        echo 'net.core.rmem_max = 536870912' >> /etc/sysctl.conf
-        echo 'net.core.rmem_default = 536870912' >> /etc/sysctl.conf
-
-        sysctl -p
-        exit
 
         ## ADD ssh key on github before pulling git
         ssh-keygen -t rsa -b 4096 -C "you@email.ext"
@@ -217,7 +211,7 @@ function install_jetson_agx_environment() {
         catkin_make -j8 -DCMAKE_CXX_FLAGS="-O2"
         source devel/setup.bash
 
-        echo "this is the agx setup, so don't forget to add a dhcp server, change password, change the hostname, disable the GUI, assign usb with udev, set an static IP adress and allow people to enter by public rsa key"
+        echo "this is the agx setup, so don't forget to add a dhcp server, change password, run the network fix, change the hostname, disable the GUI, assign usb with udev, set an static IP adress and allow people to enter by public rsa key"
     fi
 
 
