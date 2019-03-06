@@ -229,31 +229,6 @@ function install_jetson_agx_environment() {
 # Main script
 ########################################################################################################
 
-while [ "$1" != "" ]; do
-    PARAM=`echo $1 | awk -F= '{print $1}'`
-    VALUE=`echo $1 | awk -F= '{print $2}'`
-    case $PARAM in
-        -h | --help)
-            usage
-            exit
-            ;;
-        --part)
-            INSTALL_PART=$VALUE
-            ;;
-        *)
-            echo "ERROR: unknown parameter \"$PARAM\""
-            usage
-            exit 1
-            ;;
-    esac
-    shift
-done
-
-if [ "${INSTALL_PART}" -lt 1 ] || [ "${INSTALL_PART}" -gt 2 ] ; then
-    # TODO: Validate why this is not working (Error msg)
-    error || "Installation script part attribute value must be 1 or 2"
-fi
-
 
 print_sonia_logo
 
