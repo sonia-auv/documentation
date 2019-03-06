@@ -92,10 +92,15 @@ function install_dev_environment() {
             python-pip
             
         ## get every file in dev and common folder
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/.bash_sonia
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/GigE-V-Framework_x86_2.00.0.0108.gz
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/bash_sonia -O ~/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/dev/GigE-V-Framework_x86_2.00.0.0108.gz -O ~/GigE-V-Framework_x86_2.00.0.0108.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bashrc -O ~/.bashrc
+
+        ## Install DALSA GiGe API Framework
+        sudo tar zxvf /GigE-V-Framework_x86_2.00.0.0108.gz
+        cd DALSA
+        sudo ./corinstall
             
         source ~/.bashrc
         source /opt/ros/melodic/setup.bash
@@ -158,10 +163,10 @@ function install_jetson_agx_environment() {
             libhdf5-dev
         
         ## get every file in dev and common folder
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/.bash_sonia
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bash_aliases
-        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/.bashrc
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/bash_sonia -O ~/.bash_sonia
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz -O ~/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
+        wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bashrc -O ~/.bashrc
         
         ## install python package for Tensorflow
         pip install -U pip
@@ -171,7 +176,7 @@ function install_jetson_agx_environment() {
         ## Install DALSA GiGe API Framework
         sudo tar zxvf GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
         cd DALSA
-        ./corinstall
+        sudo ./corinstall
 
         ## install the bash script
         echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
