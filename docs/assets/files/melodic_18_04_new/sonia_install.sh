@@ -158,7 +158,7 @@ function install_jetson_agx_environment() {
             libarmadillo-dev \
             libmlpack-dev \
             python-pip \
-            ibhdf5-serial-dev \
+            libhdf5-serial-dev \
             hdf5-tools \
             zlib1g-dev \
             zip \
