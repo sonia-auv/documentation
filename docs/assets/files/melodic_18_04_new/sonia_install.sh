@@ -169,16 +169,12 @@ function install_jetson_agx_environment() {
         wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/bash_sonia -O ~/.bash_sonia
         wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/agx/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz -O ~/GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
         wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
-
-        echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
-        echo "  . ~/.bash_sonia" >> ~/.bashrc
-        echo "fi" >> ~/.bashrc
         
         ## install python package for Tensorflow
         pip install -U pip
         sudo pip install -U numpy grpcio absl-py py-cpuinfo psutil portpicker grpcio six mock requests gast h5py astor termcolor
         pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v411 tensorflow-gpu
-        
+
         ## install the bash script
         echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
         echo "  . ~/.bash_sonia" >> ~/.bashrc
