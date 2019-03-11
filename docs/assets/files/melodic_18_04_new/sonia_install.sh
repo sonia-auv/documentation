@@ -171,7 +171,6 @@ function install_jetson_agx_environment() {
         wget http://sonia-auv.readthedocs.org/assets/files/melodic_18_04_new/common/bash_aliases -O ~/.bash_aliases
         
         ## install python package for Tensorflow
-        pip install -U pip
         sudo pip install -U numpy grpcio absl-py py-cpuinfo psutil portpicker grpcio six mock requests gast h5py astor termcolor
         pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v411 tensorflow-gpu
 
