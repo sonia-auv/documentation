@@ -178,12 +178,7 @@ function install_jetson_agx_environment() {
         pip install -U pip
         sudo pip install -U numpy grpcio absl-py py-cpuinfo psutil portpicker grpcio six mock requests gast h5py astor termcolor
         pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v411 tensorflow-gpu
-
-        ## Install DALSA GiGe API Framework
-        sudo tar zxvf GigE-V-Framework_JetsonTX1_2.10.2.0158.tar.gz
-        cd DALSA
-        sudo ./corinstall
-
+        
         ## install the bash script
         echo "if [ -f ~/.bash_sonia ]; then" >> ~/.bashrc
         echo "  . ~/.bash_sonia" >> ~/.bashrc
