@@ -2,7 +2,7 @@
 
 The `proc_navigation` package is the module that provides the system with the localisation and the attitude of the submarine.
 
-It is based on an [Extended Kalman Filter](https://en.wikipedia.org/wiki/Extended_Kalman_filter) and will take the data from the Inertial Measurement Unit (IMU), the Magnetometer, the Barometer and the Doppler Velocity Log (DVL).
+It is based on an [Extended Kalman Filter](https://en.wikipedia.org/wiki/Extended_Kalman_filter) and will take the data from the Inertial Measurement Unit (IMU)( the Magnetometer and the Barometer) and the Doppler Velocity Log (DVL).
 
 ## Overview
 
