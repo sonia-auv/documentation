@@ -9,7 +9,7 @@ It is based on an [Extended Kalman Filter](https://en.wikipedia.org/wiki/Extende
 ### Usage Example
 
 A launch file exists for launching the `proc_navigation` package.
-One you have compiled and sourced the `devel/setup.bash` file, you can simply
+Once you have compiled and sourced the `devel/setup.bash` file, you can simply
 execute:
 
 	roslaunch proc_navigation proc_navigation.launch
