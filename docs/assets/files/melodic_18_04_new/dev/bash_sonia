@@ -34,6 +34,7 @@ alias telemetry='rqt --perspective-file ${ROS_SONIA_WS}/src/rqt_sonia_plugins/SO
 alias controlSub='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Control.perspective'
 alias dry_test='rqt --perspective-file ${ROS_SONIA_WS}/perspective/dry_test.perspective'
 alias pool='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Test_piscine.perspective'
+alias planning='rqt --perspective-file ${ROS_SONIA_WS}/perspective/Plannig.perspective'
 
 ## useful function
 function comp () {
