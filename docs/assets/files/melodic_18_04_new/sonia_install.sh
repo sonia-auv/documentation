@@ -101,7 +101,7 @@ function install_dev_environment() {
         echo "fi" >> ~/.bashrc
 
         ## Install DALSA GiGe API Framework
-        sudo tar zxvf /GigE-V-Framework_x86_2.00.0.0108.gz
+        sudo tar zxvf GigE-V-Framework_x86_2.00.0.0108.gz
         cd DALSA
         sudo ./corinstall
             
