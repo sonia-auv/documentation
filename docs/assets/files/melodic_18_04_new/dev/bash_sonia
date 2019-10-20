@@ -21,7 +21,7 @@ fi
 
 ## Useful aliases
 alias sas='roslaunch ${ROS_SONIA_WS}/launch/simulation_auv7.launch'
-alias babe='ssh -X sonia@192.168.0.11'
+alias babe='ssh -X babe@192.168.0.11'
 alias jetson='ssh -X nvidia@192.168.0.13'
 alias babe?='ping 192.168.0.11'
 alias switch?='ping 192.168.0.12'
